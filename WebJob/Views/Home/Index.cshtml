@@ -1,31 +1,264 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<link href="~/Content/Body.css" rel="stylesheet" />
+<section class="cps-section">
+    <div class="std">
+        <div class="cps-container">
+            <div class="filter-jobs">
+                <div class="filter-jobs-form">
+                    <form class="d-flex justify-content-start" data-controller="jobs--filter"
+                          data-action="ajax:success->jobs--filter#filter" action="/it-jobs" method="get">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+                        <div class="pe-3">
+                            <div class="dropdown" data-controller="jobs--counter-filter">
+                                <a class="btn btn-light dropdown-toggle" id="dropbtn" onclick="myFunction()" data-bs-auto-close="outside" data-bs-offset="0, 7" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="badge bg-primary rounded-pill d-none" data-jobs--counter-filter-target="checkedNumber"></span>
+                                    <span id="dropbtn">Job Level</span>
+                                </a>
+                                <div aria-labelledby="menuJobLevels" class="dropdown-menu" id="menuJobLevels" style="">
+                                    <input type="hidden" name="job_level_names[]" value="" autocomplete="off">
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Fresher" name="job_level_names[]" id="job_level_names_fresher">
+                                            <label for="job_level_names_fresher">Fresher</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Junior" name="job_level_names[]" id="job_level_names_junior">
+                                            <label for="job_level_names_junior">Junior</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Senior" name="job_level_names[]" id="job_level_names_senior">
+                                            <label for="job_level_names_senior">Senior</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Manager" name="job_level_names[]" id="job_level_names_manager">
+                                            <label for="job_level_names_manager">Manager</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pe-3">
+                            <div class="dropdown" data-controller="jobs--counter-filter">
+                                <a  class="btn btn-light dropdown-toggle" id="dropbtn" onclick="myFunctionS()" data-bs-auto-close="outside" data-bs-offset="0, 7" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="badge bg-primary rounded-pill d-none" data-jobs--counter-filter-target="checkedNumber"></span>
+                                    <span id="dropbtn">Job Salary</span>
+                                </a>
+                                <div aria-labelledby="menuSalary" class="dropdown-menu" id="menuSalary">
+                                    <input type="hidden" name="job_level_names[]" value="" autocomplete="off">
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Fresher" name="job_level_names[]" id="job_level_names_fresher">
+                                            <label for="job_level_names_fresher">Fresher</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Junior" name="job_level_names[]" id="job_level_names_junior">
+                                            <label for="job_level_names_junior">Junior</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Senior" name="job_level_names[]" id="job_level_names_senior">
+                                            <label for="job_level_names_senior">Senior</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Manager" name="job_level_names[]" id="job_level_names_manager">
+                                            <label for="job_level_names_manager">Manager</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pe-3">
+                            <div class="dropdown" data-controller="jobs--counter-filter">
+                                <a class="btn btn-light dropdown-toggle" id="dropbtn" onclick="myFunctionC()" data-bs-auto-close="outside" data-bs-offset="0, 7" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="badge bg-primary rounded-pill d-none" data-jobs--counter-filter-target="checkedNumber"></span>
+                                    <span id="dropbtn">Company Type</span>
+                                </a>
+                                <div aria-labelledby="menuCompany" class="dropdown-menu" id="menuCompany">
+                                    <input type="hidden" name="job_level_names[]" value="" autocomplete="off">
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Fresher" name="job_level_names[]" id="job_level_names_fresher">
+                                            <label for="job_level_names_fresher">Fresher</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Junior" name="job_level_names[]" id="job_level_names_junior">
+                                            <label for="job_level_names_junior">Junior</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-2 pb-1">
+                                        <div class="input-group-prepend">
+                                            <input data-jobs--counter-filter-target="checkBox" data-jobs--filter-target="filteringItem" type="checkbox" value="Senior" name="job_level_names[]" id="job_level_names_senior">
+                                            <label for="job_level_names_senior">Senior</label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="search search-jobs search-page__main-content" id="search-results">
+                <div class="search-page__jobs">
+                    <div class="search-page__jobs-inner">
+                        <div class="w-100" id="jobs">
+                            <h1>
+                                406
+                                <span class="search-page-header-keyword">java</span>
+                                jobs in Vietnam
+                            </h1>
+                            <div class="first-group">
+                                <div class="job super-hot-job job--selected">
+                                    <div class="job-content">
+                                        <div class="logo">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                                        </div>
+                                        <div class="job__description">
+
+                                        </div>
+                                        <div class="city_and_posted_date d-none d-sm-flex">
+
+                                        </div>
+                                    </div>
+                                    <div class="job-content">
+                                        <div class="logo">
+                                            <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="101 Digital’s vision is to be one of the best, global, ‘banking as a service’ platforms">
+                                                <a target="_blank" href="/companies/101-digital">
+                                                    <picture>
+                                                        <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXZMSmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2b689386256383d05a95cdc97b9fe95380b2d1dd/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/101%20Digital.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXZMSmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2b689386256383d05a95cdc97b9fe95380b2d1dd/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/101%20Digital.png">
+                                                        <img alt="101 Digital  Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXZMSmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2b689386256383d05a95cdc97b9fe95380b2d1dd/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/101%20Digital.png" size="65x65" class=" lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXZMSmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2b689386256383d05a95cdc97b9fe95380b2d1dd/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/101%20Digital.png">
+                                                    </picture>
+                                                </a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="job__description">
+                                            <div class="job__body">
+                                                <div class="details">
+                                                    <h3 class="title job-details-link-wrapper">
+                                                        <a target="_blank" data-controller="utm-tracking" href="/it-jobs/remote-digital-platform-engineer-java-101-digital-4255?lab_feature=preview_jd_page">[Remote]Digital Platform Engineer (Java)</a>
+                                                    </h3>
+                                                    <div class="svg-icon svg-icon--rounded svg-icon--green">
+                                                        <svg class="svg-icon__icon">
+                                                             <use></use>
+                                                        </svg>
+                                                        <div class="svg-icon__text">Competitive salary</div>
+                                                    </div>
+                                                    <div class="d-none d-sm-block">
+                                                        <ul class="benefits">
+                                                            <li> An elite team of professional</li>
+                                                            <li> Attractive salary</li>
+                                                            <li>Flexible time</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="d-sm-none">
+                                                        <div class="city">
+                                                            <div class="text">Ha Noi</div>
+                                                            <div class="text">Ho Chi Minh</div>
+                                                        </div>
+                                                        <ul class="benefits">
+                                                            <li> An elite team of professional</li>
+                                                            <li> Attractive salary</li>
+                                                            <li>Flexible time</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="job-bottom">
+                                                <div class="tag-list">
+                                                    <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/it-jobs/java">
+                                                        <span>
+                                                            Java
+                                                        </span>
+                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/it-jobs/mysql">
+                                                        <span>
+                                                            MySQL
+                                                        </span>
+                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/it-jobs/spring">
+                                                        <span>
+                                                            Spring
+                                                        </span>
+                                                    </a>
+                                                    <div class="visible-xs d-sm-none">
+                                                        <div class="distance-time-job-posted">
+                                                            <span class="distance-time highlight">
+                                                                55m
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="city_and_posted_date d-none d-sm-flex">
+                                            <div class="feature new text">Hot</div>
+                                            <div class="city">
+                                                <div class="address">
+                                                    <div class="text">Ha Noi</div>
+                                                    <div class="text">Ho Chi Minh</div>
+                                                </div>
+                                            </div>
+                                            <div class="distance-time-job-posted">
+                                                <span class="distance-time highlight">
+                                                    55m
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="search-page__job-preview hidden-xs">
+
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+    function myFunction() {
+        document.getElementById("menuJobLevels").classList.toggle("show");
+        document.getElementById("menuSalary").classList.remove("show");
+        document.getElementById("menuCompany").classList.remove("show");
+    }
+    function myFunctionS() {
+        document.getElementById("menuSalary").classList.toggle("show");
+        document.getElementById("menuJobLevels").classList.remove("show");
+        document.getElementById("menuCompany").classList.remove("show");
+    }
+    function myFunctionC() {
+        document.getElementById("menuCompany").classList.toggle("show");
+        document.getElementById("menuJobLevels").classList.remove("show");
+        document.getElementById("menuSalary").classList.remove("show");
+    }
+    window.onclick = function (event) {
+        if (!event.target.matches('#dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
