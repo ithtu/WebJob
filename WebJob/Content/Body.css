@@ -167,6 +167,7 @@ filter-jobs .dropdown-toggle::after {
     font-weight: 400;
     padding: 27px 0;
     transition: all 0.25s ease;
+    cursor: pointer;
 }
 .job--selected .job-content {
     border: 1px solid #ea2635;
