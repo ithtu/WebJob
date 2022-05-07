@@ -1,17 +1,306 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<link href="~/Content/home.css" rel="stylesheet" />
+<link href="~/Content/search.css" rel="stylesheet" />
+<link href="~/Content/Body.css" rel="stylesheet" />
+<div class="std">
+    <div class="search-header search-header--black">
+        <div class="search-form-wrapper search-form-wrapper--loose clearfix">
+            <h1 class="slogan">
+                1,944 Việc Làm IT Chất
+                <br class="br-on-mobile">Dành Cho 7405_Nguyễn Quốc Tú<br>
+            </h1>
+            <form id="search_form" class="search-form" data-controller="search--autocomplete" data-search--autocomplete-seo-url-value="https://itviec.com/viec-lam-it" data-search--autocomplete-query-source-url-value="/api/v1/tags/populars" data-search--autocomplete-recent-searches-value=".net" action="/viec-lam-it" accept-charset="UTF-8" method="get">
+                <div class="search-form__keyword-section rounded">
+                    <div class="input-group dropdown">
+                        <div class="search-form__icon svg-icon svg-icon--grey svg-icon--16">
+                            <svg class="svg-icon__icon">
+                                <use xlink:href="#search_icon"></use>
+                            </svg>
+                        </div>
+                        <input type="text" name="query" id="query" value="" class="search-form__keyword-input dropdown-toggle" autocomplete="off" placeholder="Tìm kiếm theo kỹ năng, chức vụ, công ty..." data-search--autocomplete-target="query" data-action="search--autocomplete#toggleClearButton" data-bs-toggle="dropdown" data-bs-display="static"><div class="dropdown-menu w-100 ts-dropdown m-0 d-none"></div>
+                        <a class="search-form__clear svg-icon svg-icon--16 d-none" data-action="search--autocomplete#clearQuery" data-search--autocomplete-target="clearBtn">
+                            <svg class="svg-icon__icon">
+                                <use xlink:href="#close_lg_icon"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                @*  <div class="search-form__city-section rounded" data-controller="auto-populate-city">
+                        <div class="w-100">
+                            <select name="city" id="city" class="search-form__city-select tomselected ts-hidden-accessible" data-cities="{&quot;ho-chi-minh-hcm&quot;:&quot;Ho Chi Minh&quot;,&quot;ha-noi&quot;:&quot;Ha Noi&quot;,&quot;da-nang&quot;:&quot;Da Nang&quot;,&quot;others&quot;:&quot;Others&quot;}" data-preload="true" data-auto-populate-city-target="select" data-search--autocomplete-target="city" data-controller="search--city_selection" tabindex="-1">
+                                <option value="">Thành phố</option>
+                                <option value="ho-chi-minh-hcm">Ho Chi Minh</option>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+                                <option value="da-nang">Da Nang</option>
+                                <option value="others">Others</option>
+                                <option selected="selected" value="ha-noi">Ha Noi</option>
+                            </select><div class="ts-wrapper search-form__city-select single full has-items"><div class="ts-control" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="city-ts-dropdown" id="city-ts-control" tabindex="0" aria-activedescendant="city-opt-3"><div data-value="ha-noi" class="item" data-ts-item="">Ha Noi</div></div><div class="ts-dropdown single" style="display: none; visibility: visible;"><div role="listbox" tabindex="-1" class="ts-dropdown-content" id="city-ts-dropdown"><div data-selectable="" data-value="" class="option" role="option" id="city-opt-1">Thành phố</div><div data-selectable="" data-value="ho-chi-minh-hcm" class="option" role="option" id="city-opt-2">Ho Chi Minh</div><div data-selectable="" data-value="ha-noi" class="option selected active" role="option" id="city-opt-3" aria-selected="true">Ha Noi</div><div data-selectable="" data-value="da-nang" class="option" role="option" id="city-opt-4">Da Nang</div><div data-selectable="" data-value="others" class="option" role="option" id="city-opt-5">Others</div></div></div></div>
+                        </div>
+                    </div>*@
+                <div class="search-overlay first-overlay"></div>
+                <div class="search-overlay second-overlay" data-action="click->search--autocomplete#closeOverlay"></div>
+                <div class="search-form__action-section">
+                    <input type="submit" name="commit" value="Tìm Kiếm" class="search-form__action button-red left rounded" data-disable-with="Tìm Kiếm">
+                </div>
+            </form>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            <div class="page-header__tag-list hidden-xs d-none d-sm-block">
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/tester/ha-noi">Tester</a>
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/java/ha-noi">Java</a>
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/php/ha-noi">PHP</a>
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/android/ha-noi">Android</a>
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">.NET</a>
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/ios/ha-noi">iOS</a>
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/business-analyst/ha-noi">Business Analyst</a>
+                <a class="head no-border ilabel popular-keyword" data-controller="utm-tracking" href="/viec-lam-it/qa-qc/ha-noi">QA QC</a>
+            </div>
+        </div>
+    </div>
+    <div class="cps-container" style="padding: 0px 0px">
+        <div class="homepage__jobs-container">
+            <div class="suggested-jobs">
+            </div>
+            <div class="top-companies">
+                <div class="title">Nhà Tuyển Dụng Hàng Đầu</div>
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/parcel-perform?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL0xtSkE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--95150a5ffe6fbd243455bd11030f790c775b772b/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/PP%20Favicon-03.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL0xtSkE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--95150a5ffe6fbd243455bd11030f790c775b772b/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/PP%20Favicon-03.png">
+                                    <img alt="Parcel Perform Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL0xtSkE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--95150a5ffe6fbd243455bd11030f790c775b772b/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/PP%20Favicon-03.png" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL0xtSkE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--95150a5ffe6fbd243455bd11030f790c775b772b/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/PP%20Favicon-03.png">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">Parcel Perform</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        10 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ho Chi Minh</span>
+                            </footer>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/hcl-vietnam-company-limited?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNjEzSVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b2fefe087556b5c4712d88ce10515b88263570/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/imgpsh_fullsize_anim%20(3).png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNjEzSVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b2fefe087556b5c4712d88ce10515b88263570/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/imgpsh_fullsize_anim%20(3).png">
+                                    <img alt="HCL Vietnam Company Limited Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNjEzSVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b2fefe087556b5c4712d88ce10515b88263570/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/imgpsh_fullsize_anim%20(3).png" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNjEzSVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b2fefe087556b5c4712d88ce10515b88263570/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/imgpsh_fullsize_anim%20(3).png">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">HCL Vietnam Company Limited</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        7 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ha Noi</span>
+                            </footer>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/nab-in-collaboration-with-positive-thinking-company-in-vietnam?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXlWSUE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7d1a908cbae15e0eae2b893df15af3dbc63daf19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/nab%20-%20logo%20.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXlWSUE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7d1a908cbae15e0eae2b893df15af3dbc63daf19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/nab%20-%20logo%20.png">
+                                    <img alt="NAB in collaboration with Positive Thinking Company in Vietnam Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXlWSUE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7d1a908cbae15e0eae2b893df15af3dbc63daf19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/nab%20-%20logo%20.png" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXlWSUE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7d1a908cbae15e0eae2b893df15af3dbc63daf19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/nab%20-%20logo%20.png">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">NAB in collaboration with Positive Thinking Com...</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        6 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ho Chi Minh</span>
+                            </footer>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/giao-hang-tiet-kiem?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNDhpSHc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--88d15c39d57b30bb53c73d2d9374626798ec6b42/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/1605013996911-Thi%E1%BA%BFt%20k%E1%BA%BF%20kh%C3%B4ng%20t%C3%AAn%20(18).png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNDhpSHc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--88d15c39d57b30bb53c73d2d9374626798ec6b42/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/1605013996911-Thi%E1%BA%BFt%20k%E1%BA%BF%20kh%C3%B4ng%20t%C3%AAn%20(18).png">
+                                    <img alt="Giao Hàng Tiết Kiệm Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNDhpSHc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--88d15c39d57b30bb53c73d2d9374626798ec6b42/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/1605013996911-Thi%E1%BA%BFt%20k%E1%BA%BF%20kh%C3%B4ng%20t%C3%AAn%20(18).png" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNDhpSHc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--88d15c39d57b30bb53c73d2d9374626798ec6b42/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/1605013996911-Thi%E1%BA%BFt%20k%E1%BA%BF%20kh%C3%B4ng%20t%C3%AAn%20(18).png">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">Giao Hàng Tiết Kiệm</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        4 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ha Noi</span>
+                            </footer>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/tng-holdings-vietnam?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNS9FSXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--63c68c71e6d5dbed5a5505d7535b4c9fa3050c92/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/TNG.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNS9FSXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--63c68c71e6d5dbed5a5505d7535b4c9fa3050c92/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/TNG.png">
+                                    <img alt="TNG Holdings Vietnam Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNS9FSXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--63c68c71e6d5dbed5a5505d7535b4c9fa3050c92/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/TNG.png" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNS9FSXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--63c68c71e6d5dbed5a5505d7535b4c9fa3050c92/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/TNG.png">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">TNG Holdings Vietnam</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        2 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ha Noi</span>
+                            </footer>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/ngan-hang-a-chau-acb?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/download.png">
+                                    <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/download.png" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/download.png">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">Ngân Hàng Á Châu | ACB</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        13 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ho Chi Minh</span>
+                            </footer>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/rikkeisoft?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMVlvREE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--722d9e68b160dacad4cfea7215cd742001c61f8a/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/rikkeisoft-logo.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMVlvREE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--722d9e68b160dacad4cfea7215cd742001c61f8a/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/rikkeisoft-logo.png">
+                                    <img alt="RIKKEISOFT Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMVlvREE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--722d9e68b160dacad4cfea7215cd742001c61f8a/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/rikkeisoft-logo.png" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMVlvREE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--722d9e68b160dacad4cfea7215cd742001c61f8a/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/rikkeisoft-logo.png">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">RIKKEISOFT</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        6 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ha Noi</span>
+                            </footer>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-3">
+
+                        <a class="top-company" data-controller="utm-tracking" rel="nofollow" data-method="put" href="/nha-tuyen-dung/viettel-group?track_action=Click+Hiring">
+                            <div class="top-company__logo text-center">
+                                <picture>
+                                    <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN09SR3c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9e848ba224da266da4ba33083a5e35ca2691009e/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/logo%20Viettel.JPG" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN09SR3c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9e848ba224da266da4ba33083a5e35ca2691009e/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/logo%20Viettel.JPG">
+                                    <img alt="Viettel Group Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN09SR3c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9e848ba224da266da4ba33083a5e35ca2691009e/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJU2xCSEJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--b87d503d3a457aac1246ae514e3d214676592f9b/logo%20Viettel.JPG" height="170" width="170" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN09SR3c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9e848ba224da266da4ba33083a5e35ca2691009e/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJU2xCSEJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--b87d503d3a457aac1246ae514e3d214676592f9b/logo%20Viettel.JPG">
+                                </picture>
+                            </div>
+                            <div class="top-company__name text-center">Viettel Group</div>
+                            <footer class="top-company__footer text-center">
+                                <span class="top-company__footer-jobs">
+                                    <span class="red link">
+                                        3 Việc làm
+                                    </span>
+                                    <span>&nbsp;-&nbsp;</span>
+                                </span>
+                                <span class="top-company__footer-city">Ha Noi</span>
+                            </footer>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="blog-list">
+                <div class="blog-list__header">
+                    <h3 class="blog-list__title">Bài viết mới</h3>
+                    <div class="blog-list__cta">
+                        <a target="_blank" class="ilink ilink--grey ilink--small ilink--dotted" href="https://itviec.com/blog/">
+                            Xem tất cả
+                            <div class="svg-icon svg-icon--inline">
+                                <svg class="svg-icon__icon">
+                                    <use xlink:href="#caret-right-icon"></use>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-list__content">
+
+                    <div class="blog">
+                        <a class="blog__image-link" href="https://itviec.com/blog/vietnam-it-recruiting-market-2021-2022?utm_campaign=featuredpost&amp;utm_medium=footer&amp;utm_source=itviec.com">
+                            <img data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNTQrSnc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c721fa0cd693f90b2f7e4c20fbe4d432afa93991/vietnam-it-recruitment-market-thumbnail-200x113.png" height="80" width="160" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNTQrSnc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c721fa0cd693f90b2f7e4c20fbe4d432afa93991/vietnam-it-recruitment-market-thumbnail-200x113.png">
+                        </a><div class="blog__description">
+                            <h4 class="blog__description-title">
+                                <a target="_blank" href="https://itviec.com/blog/vietnam-it-recruiting-market-2021-2022?utm_campaign=featuredpost&amp;utm_medium=footer&amp;utm_source=itviec.com">Vietnam IT recruiting market 2021-2022: What to expect?</a>
+                            </h4>
+                            <div class="blog__description-content">
+                                Strong demand for Vietnam IT recruiting in 2021 and 2022 despite the ongoing Covid-19 situations. Let’s explore employer’s reactions in 2021 and the plans for...
+                            </div>
+                            <div class="blog__read-more">
+                                <a target="_blank" class="ilink ilink--grey ilink--small ilink--dotted" href="https://itviec.com/blog/vietnam-it-recruiting-market-2021-2022?utm_campaign=featuredpost&amp;utm_medium=footer&amp;utm_source=itviec.com">
+                                    Read more
+                                    <div class="svg-icon svg-icon--inline">
+                                        <svg class="svg-icon__icon">
+                                            <use xlink:href="#caret-right-icon"></use>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog">
+                        <a class="blog__image-link" href="https://itviec.com/blog/game-online-mien-phi-lap-trinh-danh-cho-developer?utm_campaign=featuredpost&amp;utm_medium=footer&amp;utm_source=itviec.com">
+                            <img data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM25wSmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9eddcbe0806e81eeca746e2b9a9d069c21db9748/game-online-mien-phi-thumbnail-200x105.jpg" height="80" width="160" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM25wSmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9eddcbe0806e81eeca746e2b9a9d069c21db9748/game-online-mien-phi-thumbnail-200x105.jpg">
+                        </a><div class="blog__description">
+                            <h4 class="blog__description-title">
+                                <a target="_blank" href="https://itviec.com/blog/game-online-mien-phi-lap-trinh-danh-cho-developer?utm_campaign=featuredpost&amp;utm_medium=footer&amp;utm_source=itviec.com">Top 10+ game online miễn phí về lập trình dành cho Developer</a>
+                            </h4>
+                            <div class="blog__description-content">
+                                Tuy hầu hết các game online miễn phí về lập trình đều hướng đến đối tượng là trẻ em nhưng cũng có nhiều game lập...
+                            </div>
+                            <div class="blog__read-more">
+                                <a target="_blank" class="ilink ilink--grey ilink--small ilink--dotted" href="https://itviec.com/blog/game-online-mien-phi-lap-trinh-danh-cho-developer?utm_campaign=featuredpost&amp;utm_medium=footer&amp;utm_source=itviec.com">
+                                    Read more
+                                    <div class="svg-icon svg-icon--inline">
+                                        <svg class="svg-icon__icon">
+                                            <use xlink:href="#caret-right-icon"></use>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
