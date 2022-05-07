@@ -49,67 +49,77 @@
                 
                 <ul class="navbar-nav align-items-center ms-auto">
                     @*neu section account != null thì sigin->dropdown*@
-                    <li class="nav-item dropdown" id="user-dropdown">
-                        <div class="d-inline-flex align-items-center">
-                            <a class="dropdown-toggle nav-link">
-                                <span class="dropdown-toggle__text">7405_Nguyễn Quốc Tú</span>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="sign-in-user-avatar"><img class="user-avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gjqx2kAsg6W8bRSXhapTEdz2RnKpnv9N4NOmLBvIQ=s96-c" width="32" height="32"></div>
-                        </div>
-                        <ul class="dropdown-menu dropdown-user" role="menu">
-                            <li class="dropdown-menu__item--user">
-                                <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/profile">
-                                    <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                        <svg class="svg-icon__icon">
-                                            <use xlink:href="#person-icon"></use>
-                                        </svg>
-                                        <div class="svg-icon__text">My Account</div>
-                                    </div>
+                    @if (Session["account"] != null)
+                    {
+                        <li class="nav-item dropdown" id="user-dropdown">
+                            <div class="d-inline-flex align-items-center">
+                                <a class="dropdown-toggle nav-link">
+                                    <span class="dropdown-toggle__text">7405_Nguyễn Quốc Tú</span>
+                                    <span class="caret"></span>
                                 </a>
-                            </li>
-                            <li class="dropdown-menu__item--user">
-                                <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/myjr">
-                                    <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                        <svg class="svg-icon__icon">
-                                            <use xlink:href="#job-robot-icon"></use>
-                                        </svg>
-                                        <div class="svg-icon__text">My Job Robot</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-menu__item--user">
-                                <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/saved-jobs">
-                                    <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                        <svg class="svg-icon__icon">
-                                            <use xlink:href="#suit-heart-fill-icon"></use>
-                                        </svg>
-                                        <div class="svg-icon__text">Saved Jobs</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-menu__item--user">
-                                <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/job-applications">
-                                    <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                        <svg class="svg-icon__icon">
-                                            <use xlink:href="#check-square-fill-icon"></use>
-                                        </svg>
-                                        <div class="svg-icon__text">Applied Jobs</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-menu__item--user">
-                                <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/job-applications">
-                                    <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                        <svg class="svg-icon__icon">
-                                            <use xlink:href="#check-square-fill-icon"></use>
-                                        </svg>
-                                        <div class="svg-icon__text">Sign out</div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                                <div class="sign-in-user-avatar"><img class="user-avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gjqx2kAsg6W8bRSXhapTEdz2RnKpnv9N4NOmLBvIQ=s96-c" width="32" height="32"></div>
+                            </div>
+                            <ul class="dropdown-menu dropdown-user" role="menu">
+                                <li class="dropdown-menu__item--user">
+                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/profile">
+                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                            <svg class="svg-icon__icon">
+                                                <use xlink:href="#person-icon"></use>
+                                            </svg>
+                                            <div class="svg-icon__text">My Account</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown-menu__item--user">
+                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/myjr">
+                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                            <svg class="svg-icon__icon">
+                                                <use xlink:href="#job-robot-icon"></use>
+                                            </svg>
+                                            <div class="svg-icon__text">My Job Robot</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown-menu__item--user">
+                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/saved-jobs">
+                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                            <svg class="svg-icon__icon">
+                                                <use xlink:href="#suit-heart-fill-icon"></use>
+                                            </svg>
+                                            <div class="svg-icon__text">Saved Jobs</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown-menu__item--user">
+                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/job-applications">
+                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                            <svg class="svg-icon__icon">
+                                                <use xlink:href="#check-square-fill-icon"></use>
+                                            </svg>
+                                            <div class="svg-icon__text">Applied Jobs</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="dropdown-menu__item--user">
+                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/job-applications">
+                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                            <svg class="svg-icon__icon">
+                                                <use xlink:href="#check-square-fill-icon"></use>
+                                            </svg>
+                                            <div class="svg-icon__text">Sign out</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("Login","User")">Sign in</a>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </div>
