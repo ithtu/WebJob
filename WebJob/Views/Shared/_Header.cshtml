@@ -1,4 +1,6 @@
-﻿<link href="~/Content/Header.css" rel="stylesheet" />
+﻿@model WebJob.Models.employee
+
+<link href="~/Content/Header.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <header class="cps-header">
@@ -54,7 +56,7 @@
                         <li class="nav-item dropdown" id="user-dropdown">
                             <div class="d-inline-flex align-items-center">
                                 <a class="dropdown-toggle nav-link">
-                                    <span class="dropdown-toggle__text">7405_Nguyễn Quốc Tú</span>
+                                    <span class="dropdown-toggle__text">@Session["name"]</span>
                                     <span class="caret"></span>
                                 </a>
                                 <div class="sign-in-user-avatar"><img class="user-avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gjqx2kAsg6W8bRSXhapTEdz2RnKpnv9N4NOmLBvIQ=s96-c" width="32" height="32"></div>
@@ -101,12 +103,12 @@
                                     </a>
                                 </li>
                                 <li class="dropdown-menu__item--user">
-                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/job-applications">
+                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("Logout","User")">
                                         <div class="svg-icon svg-icon--transparent svg-icon--16">
                                             <svg class="svg-icon__icon">
                                                 <use xlink:href="#check-square-fill-icon"></use>
                                             </svg>
-                                            <div class="svg-icon__text">Sign out</div>
+                                            <div class="svg-icon__text">Log out</div>
                                         </div>
                                     </a>
                                 </li>
