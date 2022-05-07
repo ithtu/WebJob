@@ -120,7 +120,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -130,6 +132,7 @@
   <ItemGroup>
     <Content Include="Content\Account.css" />
     <Content Include="Content\Body.css" />
+    <Content Include="Content\company.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\Header.css" />
     <Content Include="Content\home.css" />
@@ -137,6 +140,7 @@
     <Content Include="Content\images\logo-bk.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\list.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\search.css" />
     <Content Include="favicon.ico" />
@@ -173,6 +177,9 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\footer.cshtml" />
+    <Content Include="Views\Jobs\ListBySkill.cshtml" />
+    <Content Include="Views\Jobs\Details.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

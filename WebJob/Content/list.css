@@ -1,0 +1,38 @@
+﻿.main-content {
+    position: relative;
+    z-index: 4;
+    margin: auto;
+    overflow: visible;
+    padding: 0;
+    border: 1px solid #d8d8d8;
+    max-width: 1024px;
+    background-color: white;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.job-skill-indices {
+    padding: 0 30px;
+}
+.job-skill-index-headline {
+    display: block;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    font-weight: 500;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 16px;
+    margin-top: 21px;
+}
+.skill-tag__list {
+    list-style: none;
+    font-size: 14px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 32px 0 14px;
+}
+.skill-tag__item {
+    padding: 3px 0;
+}
+    .skill-tag__item a {
+        color: #808184;
+    }

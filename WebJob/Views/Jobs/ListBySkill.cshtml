@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "ListBySkill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/list.css" rel="stylesheet" />
+<div class="main-content container-fluid" id="homepage">
+    <div class="job-skill-indices">
+        <h1 class="job-skill-index-headline">Jobs by Skill</h1>
+        <ul class="skill-tag__list">
+            @*dung for để lấy ra list*@
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/agile">Agile</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/android">Android</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/angular">Angular</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/angularjs">AngularJS</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/asp.net">ASP.NET</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/aws">AWS</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/blockchain">Blockchain</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/bridge-engineer">Bridge Engineer</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/business-analyst">Business Analyst</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/csharp">C#</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/c++">C++</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/c-language">C language</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/cloud">Cloud</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/cocos">Cocos</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/css">CSS</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/data-analyst">Data Analyst</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/database">Database</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/designer">Designer</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/devops">DevOps</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/django">Django</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/drupal">Drupal</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/embedded">Embedded</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/english">English</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/erp">ERP</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/flutter">Flutter</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/games">Games</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/golang">Golang</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/html5">HTML5</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/ios">iOS</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/it-support">IT Support</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/j2ee">J2EE</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/japanese">Japanese</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/java">Java</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/javascript">JavaScript</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/jquery">JQuery</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/json">JSON</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/kotlin">Kotlin</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/laravel">Laravel</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/linux">Linux</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/magento">Magento</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/manager">Manager</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/mvc">MVC</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/mysql">MySQL</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/.net">.NET</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/networking">Networking</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/nodejs">NodeJS</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/nosql">NoSQL</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/objective-c">Objective C</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/oop">OOP</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/oracle">Oracle</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/php">PHP</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/postgresql">PostgreSql</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/product-manager">Product Manager</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/project-manager">Project Manager</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/python">Python</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/qa-qc">QA QC</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/reactjs">ReactJS</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/react-native">React Native</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/ruby">Ruby</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/ruby-on-rails">Ruby on Rails</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/sap">SAP</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/scala">Scala</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/scrum">Scrum</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/sharepoint">Sharepoint</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/software-architect">Software Architect</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/spring">Spring</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/sql">SQL</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/swift">Swift</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/system-admin">System Admin</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/system-engineer">System Engineer</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/team-leader">Team Leader</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/tester">Tester</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/typescript">TypeScript</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/ui-ux">UI-UX</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/unity">Unity</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/vuejs">VueJS</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/wordpress">Wordpress</a></li>
+            <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="/it-jobs/xamarin">Xamarin</a></li>
+        </ul>
+    </div>
+</div>
+

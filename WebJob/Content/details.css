@@ -64,3 +64,198 @@ a {
     background: #ffffff;
     display:block;
 }
+
+.jd-page {
+    position: relative;
+    z-index: 4;
+    margin: 0 0 20px;
+    overflow: visible;
+    max-width: 1350px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+.jd-photos {
+    display: none;
+    max-width: 100%;
+    min-height: 185px;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.jd-page__job-details {
+    background-color: #ffffff;
+    padding: 0 20px 20px;
+}
+.jd-page__employer-overview-inner {
+    position: sticky;
+    top: 55px;
+}
+.employer-long-overview {
+    background-color: #ffffff;
+    padding: 20px;
+}
+.employer-long-overview__top {
+    display: flex;
+}
+.employer-long-overview__main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.employer-long-overview__logo {
+    width: 100px;
+    margin: 0 auto 15px;
+    text-align: center;
+}
+    .employer-long-overview__logo img {
+        max-width: 100%;
+    }
+.employer-long-overview__top-left {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.employer-long-overview__name {
+    font-size: 1.5em;
+    margin: 0;
+}
+    .employer-long-overview__name a {
+        color: black;
+    }
+.employer-long-overview__short-desc {
+    padding: 10px 0;
+    color: #5c5a5b;
+    font-size: 14px;
+}
+.employer-long-overview__main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.employer-long-overview__basic-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: #58595b;
+    font-size: 13px;
+    line-height: 21px;
+}
+.svg-icon {
+    display: flex;
+    align-items: center;
+}
+.svg-icon__icon {
+    fill: currentColor;
+    width: 14px;
+    height: 14px;
+    color: #7a7a7a;
+    flex-shrink: 0;
+}
+.svg-icon__text {
+    margin-left: 10px;
+}
+.employer-long-overview__jobs {
+    margin: 0 -20px -20px;
+    padding: 15px 20px 28px;
+    display: flex;
+    flex-direction: column;
+}
+.employer-long-overview__employer-url {
+    align-self: center;
+    font-size: 16px;
+}
+
+
+
+.ibutton {
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400 !important;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    font-size: 17px;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    outline: 0;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.ibutton--outlined {
+    color: var(--button-color);
+    border: 1px solid var(--button-color);
+    background: var(--button-bg-color);
+}
+.employer-long-overview__jobs:hover > a {
+    background-color: var(--button-color);
+    color: var(--button-bg-color);
+}
+.ibutton--red {
+    --button-color: #ea1e30;
+    --button-bg-color: #fff;
+}
+
+@media (min-width: 576px) {
+    .d-sm-block {
+        display: block !important;
+    }
+    .d-sm-grid {
+        display: grid !important;
+    }
+    .d-sm-flex {
+        display: flex !important;
+    }
+}
+@media (min-width: 768px) {
+    .jd-page {
+        margin: 20px auto;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .jd-page__photos {
+        display: contents;
+    }
+
+    .jd-photos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .employer-long-overview__top {
+        align-items: center;
+    }
+}
+@media (min-width: 992px) {
+    .jd-page__job-details {
+        padding: 0 80px 20px;
+        grid-column: 1/span 2;
+    }
+    .jd-page__employer-overview {
+        grid-column: 3/-1;
+        grid-row-end: span 2;
+    }
+    .employer-long-overview__top {
+        flex-direction: column;
+    }
+    .employer-long-overview__main {
+        grid-template-columns: 1fr;
+    }
+    .employer-long-overview__logo {
+        width: 200px;
+    }
+    .employer-long-overview__top-left {
+        padding-left: 0;
+    }
+    .employer-long-overview__name {
+        margin-top: 15px;
+        text-align: center;
+    }
+    .employer-long-overview__main {
+        grid-template-columns: 1fr;
+    }
+}
+   

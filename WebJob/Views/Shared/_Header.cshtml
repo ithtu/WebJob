@@ -6,7 +6,7 @@
         <div class="cps-navbar__box-main affix" data-spy="affix">
             <div class="cps-container">
                 <div class="box-logo">
-                    <a href="@Url.Action("Index","Home")" title="JobIT">
+                    <a href="@Url.Action("Contact","Home")" title="JobIT">
                         <img src="~/Content/images/logo.png" />
                     </a>
                 </div>
@@ -15,9 +15,9 @@
                         <a>All Jobs</a>
                         <ul class="sub-menu">
                             <li>
-                                <a>Java</a>
+                                <a href="@Url.Action("ListBySkill","Jobs")">Job by skill</a>
                                 <ul class="sub-menu">
-                                    <li><a>Java</a></li>
+                                    <li><a href="@Url.Action("Index","Home")">Java</a></li>
                                     <li><a>Java</a></li>
                                     <li><a>Java</a></li>
                                     <li><a>Java</a></li>
