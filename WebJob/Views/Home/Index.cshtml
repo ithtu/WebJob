@@ -123,6 +123,7 @@
                                 jobs in Vietnam
                             </h1>
                             <div class="first-group">
+                                @*dung for de lay ra danh sach job co name = obj*@
                                 <div class="job super-hot-job job--selected">
 
                                     <div class="job-content">
@@ -501,6 +502,7 @@
         document.getElementById("menuSalary").classList.remove("show");
     }
     window.onclick = function (event) {
+        //show search check box
         if (!event.target.matches('#dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-menu");
             var i;
@@ -511,6 +513,7 @@
                 }
             }
         }
+        // add selected class
         if (!event.target.matches('.job-content')) {
             var list = document.getElementsByClassName('job');
             for (var i = 0; i < list.length; i++) {
@@ -519,12 +522,12 @@
                     current[0].className = current[0].className.replace(" job--selected", "");
                     this.className += " job--selected";
                 })
-            };
+            }
         }
             
         
     }
-    // add selected class
+    
     
     
 </script>

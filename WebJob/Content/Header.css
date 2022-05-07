@@ -1,4 +1,7 @@
-﻿li {
+﻿a{
+    text-decoration: none !important;
+}
+li {
     display: list-item;
 }
 i {
@@ -77,12 +80,12 @@ i {
         .main-menu li {
             position: relative;
         }
-        .main-menu li a{
-            color: white !important;
-            display: block;
-            padding: 18px 20px;
-            cursor: pointer;
-        }
+            .main-menu li a {
+                color: rgba(255, 255, 255, 0.55) !important;
+                display: block;
+                padding: 18px 20px;
+                cursor: pointer;
+            }
         .main-menu ul.sub-menu{
             position: absolute;
             background-color: black;
@@ -102,10 +105,20 @@ i {
             left: 0;
         }
         .main-menu ul.sub-menu li:hover>a{
-            background-color: #eee;
-            color: black !important;
+           text-shadow: 1px 1px  white!important;
             font-weight: normal !important;
            
+        }
+        .main-menu ul.sub-menu :hover>ul.sub-menu {
+            display: flex;
+            flex-wrap: wrap;
+            min-width: 400px;   
+            justify-content: left;
+            align-content: center;
+        }
+        .main-menu ul.sub-menu :hover li{
+            width:100px;
+            text-align: left;
         }
         .main-menu ul.sub-menu li:last-child a {
             border: none;
@@ -134,17 +147,17 @@ i {
             font-family: "Font Awesome 5 Free"; 
             font-weight: 900; 
             content: "\f107";
-            color: white;
+            color: rgba(255, 255, 255, 0.55) !important;
             position: absolute;
             top: 0px;
             right: 0px;
             padding: 18px 0px;
         }
-        .main-menu .sub-menu>li.has-child::after{
-            font-family: "Font Awesome 5 Free"; 
-            font-weight: 900; 
+        .main-menu .sub-menu > li.has-child::after {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
             content: "\f105";
-            color: white;
+            color: rgba(255, 255, 255, 0.55) !important;
             position: absolute;
             top: 0px;
             right: 0px;
@@ -155,3 +168,115 @@ header.cps-header nav.cps-navbar .cps-navbar__box-main.affix + .clear {
     padding-top: 64px;
     background: black;
 }
+.nav-link {
+    color: rgba(255, 255, 255, 0.55);
+}
+li#user-dropdown {
+    cursor: pointer;
+}
+
+.page-header__navbar .nav-item {
+    margin: 0 10px;
+    flex: 0 0 auto;
+}
+
+.nav-item {
+    padding: 10px 0;
+    margin: 0 15px;
+}
+
+@media (min-width: 992px){
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .navbar-nav .nav-link {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }   
+}
+.navbar-nav {
+    flex-direction: row !important;
+}
+.navbar-nav .nav-item{
+    position: relative;
+}
+.navbar-nav a{
+    color: rgba(255, 255, 255, 0.55) !important;
+}
+    .navbar-nav li:hover > a {
+        text-shadow: 1px 1px  white!important;
+        transition: 0.4s;
+    }
+    .navbar-nav li:hover > ul.dropdown-user {
+        display: block;
+    }
+    .navbar-nav:hover ul.dropdown-user {
+        position: absolute;
+        background: #2e2a2b;
+        color: rgba(255, 255, 255, 0.55);
+        left: 10px;
+    }
+li#user-dropdown:hover:before {
+    --caret-width: 0.8rem;
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    right: 56%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 var(--caret-width) var(--caret-width);
+    border-color: transparent transparent #2e2a2b transparent;
+    transform: translateX(50%);
+}
+.dropdown-menu__item--user {
+    padding: 2px 6px;
+    position: relative;
+    line-height: 32px;
+}
+li#user-dropdown .dropdown-menu__link--desktop {
+    color: #bbbdbf;
+    font-size: 16px;
+}
+.dropdown-menu__link--desktop {
+    margin: 5px 0;
+    border-radius: 3px;
+    padding-left: 0 !important;
+}
+.dropdown-menu__item--user:not(:last-child)::after {
+    content: "";
+    height: 0;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    border-bottom: 1px solid #353030;
+    border-top: 1px solid #181415;
+}
+    .dropdown .dropdown-toggle__text {
+    padding-right: 0;
+}
+
+
+
+.dropdown-toggle__text {
+    padding: 3px 5px;
+}
+.dropdown .caret {
+    margin-left: 0px;
+}
+.sign-in-user-avatar {
+    height: 100%;
+    display: inline-block;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+    .sign-in-user-avatar img {
+        display: inline-block;
+        border-radius: 100%;
+        margin-left: 10px;
+        transition: all 0.2s ease;
+        max-height: 40px;
+    }
