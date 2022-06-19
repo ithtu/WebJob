@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebJob.Models.job_skill>
+@using WebJob.Models
+
+@{
+    ViewBag.Title = "Title";
+    Layout = "~/Areas/Admin/Views/Shared/Adlayout.cshtml";
+}
+
+
+
+
+
+<h2>Skill</h2>
+
+<p>
+    @Html.ActionLink("Add New Skill", "Add", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_skill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name_skill)
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_skill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_skill)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_skill }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_skill }, new { @class = "btn btn-info" })
+
+
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebJob.Models.employee>
+    @using WebJob.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Adlayout.cshtml";
+    var list = (List<company>)ViewBag.companies;
+}
+
+<table class="table">
+    <caption style="font-size: 23px; font-weight: 900">Confirm Employees</caption>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            e-Mail
+        </th>
+        <th>
+            Confirm
+        </th>
+    </tr>
+    @foreach (var item in Model)
+     {
+         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_employee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+
+                <button data-acc-id="@item.id_account" class="btn btn-info confirm"> Confirm</button>
+                <button data-acc-id="@item.id_account" class="btn btn-danger delete">Delete</button>
+
+            </td>
+        </tr>
+      }
+</table>
+<table class="table">
+    <caption style="font-size: 23px; font-weight: 900">Confirm Companies </caption>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            e-Mail
+        </th>
+        <th>
+            Confirm
+        </th>
+    </tr>
+    @foreach(var item in list)
+    {
+        <tr>
+            <td>
+               Công ty <span style="font-weight: 700">@item.name_company</span>
+            </td>
+            <td>
+                @item.email
+            </td>
+            <td>
+                @*@item.account.confirm*@
+                @item.account.confirm
+                <button data-acc-id="@item.id_account" class="btn btn-info confirm">Confirm</button>
+                <button data-acc-id="@item.id_account" class="btn btn-danger delete">Delete</button>
+            </td>
+        </tr>
+
+    }
+</table>
+<script>
+    $(".confirm").click(function (e) {
+        var button = $(e.target);
+        $.post("/Admin/Admin/ConfirmEmp", { id: button.attr("data-acc-id") })
+            .done(function () {
+                location.reload();
+            }).fail(function () {
+                alert("Cần đăng nhập!");
+            });
+    });
+    $(".delete").click(function (e) {
+        var button = $(e.target);
+        $.post("/Admin/Admin/DelConfirmEmp", { id: button.attr("data-acc-id") })
+            .done(function () {
+                location.reload();
+            }).fail(function () {
+                alert("Cần đăng nhập!");
+            });
+    });
+</script>
+

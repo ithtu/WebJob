@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebJob.Models.job_detail>
+
+@{
+    ViewBag.Title = "Job";
+    Layout = "~/Areas/Admin/Views/Shared/Adlayout.cshtml";
+}
+
+<h2>Jobs Manager</h2>
+
+<p>
+    @Html.ActionLink("Add New Job", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Job's Name
+        </th>
+        <th>
+           Company
+        <th>
+            Salary
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Realease Date
+        </th>
+        <th>
+            Skill
+        </th>
+        
+        @*  <th>
+            @Html.DisplayNameFor(model => model.job_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.job_requiment)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.job.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.job.company.name_company)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.salary)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.amount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.job.release_date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.job_skill.name_skill)
+    </td>
+
+    @*<td>
+            @Html.DisplayFor(modelItem => item.job_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.job_requiment)
+        </td>*@
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id_job_detail }) |
+
+        @Html.ActionLink("Delete", "Delete", new { id = item.id_job_detail })
+    </td>
+</tr>
+}
+
+</table>

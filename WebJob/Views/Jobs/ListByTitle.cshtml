@@ -1,0 +1,22 @@
+﻿@model IEnumerable<WebJob.Models.job_title> 
+@{
+    ViewBag.Title = "ListByTitle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/list.css" rel="stylesheet" />
+<div class="main-content container-fluid" id="homepage">
+    <div class="job-skill-indices">
+        <h1 class="job-skill-index-headline">Jobs by Title</h1>
+        <ul class="skill-tag__list">
+            @*dung for để lấy ra list*@
+            @foreach (var item in Model)
+            {
+                <li class="skill-tag__item"><a class="mkt-track skill-tag__link" data-controller="utm-tracking" href="#">@item.name_title</a></li>
+            }
+
+           
+        </ul>
+    </div>
+</div>
+

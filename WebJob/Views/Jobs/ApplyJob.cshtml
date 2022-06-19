@@ -1,0 +1,103 @@
+﻿@model WebJob.Models.job_detail
+@{
+    ViewBag.Title = "ApplyJob";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using WebJob.Models
+<link href="~/Content/register.css" rel="stylesheet" />
+
+<div class="job_application main-content">
+    <div class="content clearfix">
+        <div class="header col-12">
+            <h3>@Model.job.name - @Model.job.company.name_company</h3>
+        </div>
+        <div class="apply-form">
+            <div class="form-content">
+                <form class="info col-md-12 px-3" id="apply_form" data-controller="job-applications--new bootstrap-validation" enctype="multipart/form-data" action="" accept-charset="UTF-8" method="post">
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2" for="job_application_fullname">Your name:</label>
+                        <div class="col-sm-10">
+                            <input style="width: 250px" required" maxlength="65" placeholder="Enter your full name" value="" size="65" type="text" name="cv_name" id="cv_name">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2" for="job_application_cv_local">Your CV:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="cv_file"  id="cv_apply"/>                           
+                            <input type="file" name="fileUpload" id="fileUpload" accept="application/msword,application/pdf,application/x-ole-storage,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                   style="display:none;" />
+                            <link id="pictureUpload" />
+                            <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" />
+                            <div class="small form-text">We accept .doc .docx, .pdf files, no password protected</div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 job_application_advantages" data-char-counter-max-length-value="500" data-controller="char-counter">
+                        <label class="text" for="job_application_advantages">What skills, work projects or achievements make you a strong candidate?</label>
+                        <div class="col-sm-12">
+<textarea placeholder="Details and specific examples will make your application stronger..." data-rule-maxlength="500" data-msg-maxlength="" data-char-counter-target="input" class="form-control" rows="3" name="cv_advantages" id="advantages"></textarea>
+                        </div>
+                        <div class="form-text text-end" data-char-counter-target="display">500 of 500 characters remaining</div>
+                    </div>
+                    <div class="actions d-grid mb-4">
+                        <button class="btn-block send_now button-red" data-disable-with="Saving..." type="submit">Send my CV</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade swal-popup" id="form-errors-modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button class="close modal-body__close swal2-close" data-bs-dismiss="modal" type="button">×</button>
+                    <div class="swal2-title">
+                        Oops! Something's not right.
+                    </div>
+                    <div class="swal2-html-container">
+                        Go back and check for <i class="fa red fa-times"></i> fields.
+                    </div>
+                    <div class="swal2-actions">
+                        <button class="swal2-red-btn" data-bs-dismiss="modal" type="button">
+                            Go back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>@section upload
+    {
+        <script>
+        $(function () {
+            $('#btnUpload').click(function () {
+                $('#fileUpload').trigger('click');
+            });
+        });
+        $('#fileUpload').change(function () {
+            if (window.FormData !== undefined) {
+                var fileUpload = $('#fileUpload').get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append('file', files[0]);
+                $.ajax(
+                    {
+                        type: 'POST',
+                        url: '/Jobs/FileUpLoad',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (urlCV) {
+                            $('#cv_apply').val(urlCV);
+                        },
+                        error: function (err) {
+                            alert('Error ', err.statusText);
+                        }
+                    });
+            }
+        });
+        </script>
+    }
+</div>
+
+

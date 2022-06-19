@@ -1,0 +1,90 @@
+﻿@model IEnumerable<WebJob.Models.following_company>
+@{
+    ViewBag.Title = "ListFollow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/register.css" rel="stylesheet" />
+<link href="~/Content/list.css" rel="stylesheet" />
+<link href="~/Content/Body.css" rel="stylesheet" />
+<link href="~/Content/save.css" rel="stylesheet" />
+<link href="~/Content/details.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="hidden-xs" data-action="click->scroll-top#scrollToTop" data-controller="scroll-top" id="scrolltop">
+        <div class="top-arrow"></div>
+    </div>
+    <div class="saved-jobs-page">
+
+        <div class="saved-jobs">
+            @if (Model.Count() == 0)
+            {
+                <h1 class="saved-jobs__headline"> You had not <span style="font-weight: 500; color: greenyellow">Follow</span> company</h1>
+            }
+            else
+            {
+                <h1 class="saved-jobs__headline">
+
+                    You are Following @Model.Count() Company
+                </h1>
+                <div class="saved-jobs__jobs">
+                    @foreach (var item in Model)
+                    {
+                        <div class="job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-slug-value="20-application-developers-java-net-c-kien-long-bank-5232" data-search--job-selection-job-url-value="/it-jobs/20-application-developers-java-net-c-kien-long-bank-5232/content?locale=en">
+                            <div class="job_content">
+                                <div class="logo">
+                                    <div style="display:flex" class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Kien Long Bank">
+                                        <a target="_blank" href="@Url.Action("Details","Company", new { id = item.company.id_company })">
+                                            <picture>
+                                                <img src="@item.company.logo" /> @*logo*@
+                                            </picture>
+                                        </a>
+                                        <div class="employer-long-overview__top-left" style="padding: 0 10px">
+                                            <h3 style="margin-top: 0px" class="employer-long-overview__name hidden-xs d-none d-sm-block">
+                                                <a data-controller="utm-tracking" href="@Url.Action("Details","Company",new { id = item.company.id_company })">
+                                                    Công TY @item.company.name_company
+                                                </a>
+                                            </h3>
+                                            <div class="employer-long-overview__short-desc">
+                                                @item.company.name_company
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="saved-wrapper" data-controller="jobs--save" id="2868a0ca-650e-40a1-86ce-1005b0f5a54b">
+                                        <div class="job-details__apply">
+                                            <div class="job-details__apply-box">
+
+                                                <div class="job-details__save-job">
+                                                    @if (item.company.isFollowing == false)
+                                                    {
+                                                        <i data-company-id="@item.company.id_company" class="btn btn-info ibutton-follow" style="color:black; font-weight:700; cursor: pointer"> Unfollow</i>
+
+
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<script>
+    $(".ibutton-follow").click(function (e) {
+        var button = $(e.target);
+        $.post("/Company/FollowCompany", { id: button.attr("data-company-id") })
+        location.reload();
+
+    });
+</script>

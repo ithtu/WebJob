@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebJob.Models.apply_job>
+
+@{
+    ViewBag.Title = "ListApply";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/register.css" rel="stylesheet" />
+<link href="~/Content/list.css" rel="stylesheet" />
+<link href="~/Content/Body.css" rel="stylesheet" />
+<link href="~/Content/save.css" rel="stylesheet" />
+<div class="container">
+    <div class="main-content container-fluid" id="homepage">
+        <div class="job-skill-indices">
+            <h1 class="job-skill-index-headline">My Applied Job</h1>
+
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    Job's Name
+                </th>
+                <th>
+                    Company's Name
+                </th>
+                <th>
+                    Note
+                </th>
+                <th>
+                    File's CV
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.job_detail.job.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.job_detail.job.company.name_company)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.note)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cv_apply)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Download", "Download", new { fileName = item.cv_apply }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+

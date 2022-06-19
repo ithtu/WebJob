@@ -1,4 +1,4 @@
-﻿@model WebJob.Models.employee
+﻿
 
 <link href="~/Content/Header.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -8,8 +8,8 @@
         <div class="cps-navbar__box-main affix" data-spy="affix">
             <div class="cps-container">
                 <div class="box-logo">
-                    <a href="@Url.Action("Contact","Home")" title="JobIT">
-                        <img src="~/Content/images/logo.png" />
+                    <a href="@Url.Action("Index","Home")" title="JobIT">
+                        <img src="~/Content/images/logo-bk.png" />
                     </a>
                 </div>
                 <ul class="main-menu">
@@ -17,35 +17,72 @@
                         <a>All Jobs</a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="@Url.Action("ListBySkill","Jobs")">Job by skill</a>
+                                <a href="@Url.Action("ListBySkill","Jobs")">Jobs by Skill</a>
                                 <ul class="sub-menu">
-                                    <li><a href="@Url.Action("Index","Home")">Java</a></li>
-                                    <li><a>Java</a></li>
-                                    <li><a>Java</a></li>
-                                    <li><a>Java</a></li>
-                                    <li><a>Java</a></li>
+                                    @foreach (var item in ViewBag.Skills)
+                                    {
+                                    <li>
+                                        @if (Session["role"] == null)
+                                        {
+                                            <a href="@Url.Action("ListJobs","Jobs", new {id = item.id_skill })">@item.name_skill</a>
+
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("ListJobs","Company", new {id = item.id_skill })">@item.name_skill</a>
+
+                                        }
+                                    </li>
+                                    }
                                 </ul>
                             </li>
                             <li>
-                                <a>Java</a>
+                                <a href="@Url.Action("ListByTitle","Jobs")">Jobs by Title</a>
                                 <ul class="sub-menu">
-                                    <li><a>Java</a></li>
-                                    <li><a>Java</a></li>
-                                    <li><a>Java</a></li>
+                                    @foreach (var item in ViewBag.Titles)
+                                    {
+                                    <li>
+                                        @if (Session["role"] == null)
+                                        {
+                                            <a href="@Url.Action("ListJobs", "Jobs", new { id = item.id_title })">@item.name_title</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("ListJobs", "Company", new { id = item.id_title })">@item.name_title</a>
+
+                                        }
+                                    </li>
+
+                                    }
                                 </ul>
                             </li>
                             <li>
-                                <a>Java</a>
+                                <a href="@Url.Action("ListByCompany","Jobs")">Jobs by Company</a>
+               
                                 <ul class="sub-menu">
-                                    <li><a>Java</a></li>
-                                    <li><a>Java</a></li>
-                                    <li><a>Java</a></li>
+                                    @foreach (var item in ViewBag.Companies)
+                                    {
+                                    <li>
+                                        @if (Session["role"] == null)
+                                        {
+                                            <a href="@Url.Action("ListJobs","Jobs", new {id = item.id_company })">@item.name_company</a>
+
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("ListJobs","Company", new {id = item.id_company })">@item.name_company</a>
+
+                                        }
+                                    </li>
+
+                                    }
+                                    
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a>All Jobs</a>
+                        <a>Blogs</a>
                     </li>
                 </ul>
                 
@@ -61,47 +98,85 @@
                                 </a>
                                 <div class="sign-in-user-avatar"><img class="user-avatar" src="https://lh3.googleusercontent.com/a-/AOh14Gjqx2kAsg6W8bRSXhapTEdz2RnKpnv9N4NOmLBvIQ=s96-c" width="32" height="32"></div>
                             </div>
+                            
                             <ul class="dropdown-menu dropdown-user" role="menu">
-                                <li class="dropdown-menu__item--user">
-                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/profile">
-                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                            <svg class="svg-icon__icon">
-                                                <use xlink:href="#person-icon"></use>
-                                            </svg>
-                                            <div class="svg-icon__text">My Account</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="dropdown-menu__item--user">
-                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/myjr">
-                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                            <svg class="svg-icon__icon">
-                                                <use xlink:href="#job-robot-icon"></use>
-                                            </svg>
-                                            <div class="svg-icon__text">My Job Robot</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="dropdown-menu__item--user">
-                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/saved-jobs">
-                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                            <svg class="svg-icon__icon">
-                                                <use xlink:href="#suit-heart-fill-icon"></use>
-                                            </svg>
-                                            <div class="svg-icon__text">Saved Jobs</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="dropdown-menu__item--user">
-                                    <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="/job-applications">
-                                        <div class="svg-icon svg-icon--transparent svg-icon--16">
-                                            <svg class="svg-icon__icon">
-                                                <use xlink:href="#check-square-fill-icon"></use>
-                                            </svg>
-                                            <div class="svg-icon__text">Applied Jobs</div>
-                                        </div>
-                                    </a>
-                                </li>
+                                @if (Session["role"] != null)
+                                {
+                                    <li class="dropdown-menu__item--user">
+                                        <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("AddJob","Company")">
+                                            <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#person-icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">Add new job</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-menu__item--user">
+                                        <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("MyJobs","Company")">
+                                            <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#person-icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">My Jobs</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-menu__item--user">
+                                        <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("ListCV","Company")">
+                                            <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#person-icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">ListCV</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="dropdown-menu__item--user">
+                                        <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("profile","User")">
+                                            <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#person-icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">My Account</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-menu__item--user">
+                                        <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("ListFollow","User")">
+                                            <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#job-robot-icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">Follow Company</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-menu__item--user">
+                                        <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("ListSave","User")">
+                                            <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#suit-heart-fill-icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">Saved Jobs</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-menu__item--user">
+                                        <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("ListApply","User")">
+                                            <div class="svg-icon svg-icon--transparent svg-icon--16">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#check-square-fill-icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">Applied Jobs</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+
                                 <li class="dropdown-menu__item--user">
                                     <a class="dropdown-menu__link--desktop" data-controller="utm-tracking" href="@Url.Action("Logout","User")">
                                         <div class="svg-icon svg-icon--transparent svg-icon--16">
@@ -119,6 +194,9 @@
                     {
                         <li>
                             <a href="@Url.Action("Login","User")">Sign in</a>
+                        </li>
+                        <li style="margin-left:20px">
+                            <a href="@Url.Action("LoginCompany","Company")">Employer</a>
                         </li>
                     }
 

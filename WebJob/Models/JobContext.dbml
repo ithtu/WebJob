@@ -4,11 +4,23 @@
     <Type Name="account">
       <Column Name="id_account" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="id_role" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="id_role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="[confirm]" Member="confirm" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Association Name="account_company" Member="companies" ThisKey="id_account" OtherKey="id_account" Type="company" />
       <Association Name="account_employee" Member="employees" ThisKey="id_account" OtherKey="id_account" Type="employee" />
       <Association Name="account_employer" Member="employers" ThisKey="id_account" OtherKey="id_account" Type="employer" />
       <Association Name="role_account" Member="role" ThisKey="id_role" OtherKey="id_role" Type="role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.apply_job" Member="apply_jobs">
+    <Type Name="apply_job">
+      <Column Name="id_employee" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_job_detail" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name_apply" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="note" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="cv_apply" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="employee_apply_job" Member="employee" ThisKey="id_employee" OtherKey="id_employee" Type="employee" IsForeignKey="true" />
+      <Association Name="job_detail_apply_job" Member="job_detail" ThisKey="id_job_detail" OtherKey="id_job_detail" Type="job_detail" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.comment_employee" Member="comment_employees">
@@ -19,6 +31,7 @@
       <Column Name="id_job_detail" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="comment_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="comment_employee_comment_employer" Member="comment_employers" ThisKey="id_comments" OtherKey="Id_comment_employee" Type="comment_employer" />
+      <Association Name="comment_employee_reply_comment" Member="reply_comments" ThisKey="id_comments" OtherKey="id_comment" Type="reply_comment" />
       <Association Name="employee_comment_employee" Member="employee" ThisKey="id_employee" OtherKey="id_employee" Type="employee" IsForeignKey="true" />
     </Type>
   </Table>
@@ -38,9 +51,16 @@
       <Column Name="id_company" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="name_company" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="address" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="phonenumber" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="active_status" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="id_account" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="logo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="company_employer" Member="employers" ThisKey="id_company" OtherKey="id_company" Type="employer" />
       <Association Name="company_following_company" Member="following_companies" ThisKey="id_company" OtherKey="id_company" Type="following_company" />
       <Association Name="company_job" Member="jobs" ThisKey="id_company" OtherKey="id_company" Type="job" />
+      <Association Name="company_reply_comment" Member="reply_comments" ThisKey="id_company" OtherKey="id_company" Type="reply_comment" />
+      <Association Name="account_company" Member="account" ThisKey="id_account" OtherKey="id_account" Type="account" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.cover_letter" Member="cover_letters">
@@ -63,9 +83,12 @@
       <Column Name="id_letter" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="id_profile" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="id_account" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="avatar" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="employee_apply_job" Member="apply_jobs" ThisKey="id_employee" OtherKey="id_employee" Type="apply_job" />
       <Association Name="employee_comment_employee" Member="comment_employees" ThisKey="id_employee" OtherKey="id_employee" Type="comment_employee" />
       <Association Name="employee_following_company" Member="following_companies" ThisKey="id_employee" OtherKey="id_employee" Type="following_company" />
       <Association Name="employee_following_job" Member="following_jobs" ThisKey="id_employee" OtherKey="id_employee" Type="following_job" />
+      <Association Name="employee_reply_comment" Member="reply_comments" ThisKey="id_employee" OtherKey="id_employee" Type="reply_comment" />
       <Association Name="account_employee" Member="account" ThisKey="id_account" OtherKey="id_account" Type="account" IsForeignKey="true" />
       <Association Name="cover_letter_employee" Member="cover_letter" ThisKey="id_letter" OtherKey="id_letter" Type="cover_letter" IsForeignKey="true" />
       <Association Name="profile_employee" Member="profile" ThisKey="id_profile" OtherKey="id_profile" Type="profile" IsForeignKey="true" />
@@ -74,14 +97,11 @@
   <Table Name="dbo.employer" Member="employers">
     <Type Name="employer">
       <Column Name="id_employer" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name_employer" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="day_birth_employer" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="phonenumer_employer" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
-      <Column Name="email" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="active_status" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="id_company" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="id_account" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="employer_comment_employer" Member="comment_employers" ThisKey="id_employer" OtherKey="id_employer" Type="comment_employer" />
       <Association Name="account_employer" Member="account" ThisKey="id_account" OtherKey="id_account" Type="account" IsForeignKey="true" />
+      <Association Name="company_employer" Member="company" ThisKey="id_company" OtherKey="id_company" Type="company" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.following_company" Member="following_companies">
@@ -110,7 +130,7 @@
       <Column Name="id_title" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="job_job_detail" Member="job_details" ThisKey="id_job" OtherKey="id_job" Type="job_detail" />
       <Association Name="company_job" Member="company" ThisKey="id_company" OtherKey="id_company" Type="company" IsForeignKey="true" />
-      <Association Name="job_title_job" Member="job_title" ThisKey="id_job" OtherKey="id_title" Type="job_title" IsForeignKey="true" />
+      <Association Name="job_title_job" Member="job_title" ThisKey="id_title" OtherKey="id_title" Type="job_title" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.job_detail" Member="job_details">
@@ -120,6 +140,7 @@
       <Column Name="amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="id_job" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="id_skill" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="job_detail_apply_job" Member="apply_jobs" ThisKey="id_job_detail" OtherKey="id_job_detail" Type="apply_job" />
       <Association Name="job_detail_following_job" Member="following_jobs" ThisKey="id_job_detail" OtherKey="id_job_detail" Type="following_job" />
       <Association Name="job_job_detail" Member="job" ThisKey="id_job" OtherKey="id_job" Type="job" IsForeignKey="true" />
       <Association Name="job_skill_job_detail" Member="job_skill" ThisKey="id_skill" OtherKey="id_skill" Type="job_skill" IsForeignKey="true" />
@@ -136,7 +157,7 @@
     <Type Name="job_title">
       <Column Name="id_title" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="name_title" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Association Name="job_title_job" Member="job" ThisKey="id_title" OtherKey="id_job" Type="job" Cardinality="One" />
+      <Association Name="job_title_job" Member="jobs" ThisKey="id_title" OtherKey="id_title" Type="job" />
     </Type>
   </Table>
   <Table Name="dbo.profile" Member="profiles">
@@ -155,11 +176,31 @@
       <Column Name="id_company" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.reply_comment" Member="reply_comments">
+    <Type Name="reply_comment">
+      <Column Name="id_comment_reply" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_reply" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="id_company" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="id_employee" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="id_comment" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="comment_employee_reply_comment" Member="comment_employee" ThisKey="id_comment" OtherKey="id_comments" Type="comment_employee" IsForeignKey="true" />
+      <Association Name="company_reply_comment" Member="company" ThisKey="id_company" OtherKey="id_company" Type="company" IsForeignKey="true" />
+      <Association Name="employee_reply_comment" Member="employee" ThisKey="id_employee" OtherKey="id_employee" Type="employee" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.role" Member="roles">
     <Type Name="role">
-      <Column Name="id_role" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_role" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="name_role" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
       <Association Name="role_account" Member="accounts" ThisKey="id_role" OtherKey="id_role" Type="account" />
+    </Type>
+  </Table>
+  <Table Name="dbo.token" Member="tokens">
+    <Type Name="token">
+      <Column Name="Token" Member="Token1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="time1" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="time2" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

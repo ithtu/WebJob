@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebJob.Models.company>
+@*@using WebJob.entities*@
+@using WebJob.Models
+
+@{
+    ViewBag.Title = "Job";
+    Layout = "~/Areas/Admin/Views/Shared/Adlayout.cshtml";
+}
+
+<h2>Companies Manager</h2>
+
+
+
+<p>
+    @Html.ActionLink("Add New Company", "Add", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name_company)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_company)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_company }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_company }, new { @class = "btn btn-info" })
+
+
+            </td>
+
+        </tr>
+    }
+
+</table>

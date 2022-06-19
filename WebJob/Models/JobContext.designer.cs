@@ -33,6 +33,9 @@ namespace WebJob.Models
     partial void Insertaccount(account instance);
     partial void Updateaccount(account instance);
     partial void Deleteaccount(account instance);
+    partial void Insertapply_job(apply_job instance);
+    partial void Updateapply_job(apply_job instance);
+    partial void Deleteapply_job(apply_job instance);
     partial void Insertcomment_employee(comment_employee instance);
     partial void Updatecomment_employee(comment_employee instance);
     partial void Deletecomment_employee(comment_employee instance);
@@ -75,6 +78,9 @@ namespace WebJob.Models
     partial void Insertrating(rating instance);
     partial void Updaterating(rating instance);
     partial void Deleterating(rating instance);
+    partial void Insertreply_comment(reply_comment instance);
+    partial void Updatereply_comment(reply_comment instance);
+    partial void Deletereply_comment(reply_comment instance);
     partial void Insertrole(role instance);
     partial void Updaterole(role instance);
     partial void Deleterole(role instance);
@@ -115,6 +121,14 @@ namespace WebJob.Models
 			get
 			{
 				return this.GetTable<account>();
+			}
+		}
+		
+		public System.Data.Linq.Table<apply_job> apply_jobs
+		{
+			get
+			{
+				return this.GetTable<apply_job>();
 			}
 		}
 		
@@ -230,11 +244,27 @@ namespace WebJob.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<reply_comment> reply_comments
+		{
+			get
+			{
+				return this.GetTable<reply_comment>();
+			}
+		}
+		
 		public System.Data.Linq.Table<role> roles
 		{
 			get
 			{
 				return this.GetTable<role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<token> tokens
+		{
+			get
+			{
+				return this.GetTable<token>();
 			}
 		}
 	}
@@ -249,9 +279,11 @@ namespace WebJob.Models
 		
 		private string _password;
 		
-		private string _id_role;
+		private int _id_role;
 		
 		private string _confirm;
+		
+		private EntitySet<company> _companies;
 		
 		private EntitySet<employee> _employees;
 		
@@ -267,7 +299,7 @@ namespace WebJob.Models
     partial void Onid_accountChanged();
     partial void OnpasswordChanging(string value);
     partial void OnpasswordChanged();
-    partial void Onid_roleChanging(string value);
+    partial void Onid_roleChanging(int value);
     partial void Onid_roleChanged();
     partial void OnconfirmChanging(string value);
     partial void OnconfirmChanged();
@@ -275,6 +307,7 @@ namespace WebJob.Models
 		
 		public account()
 		{
+			this._companies = new EntitySet<company>(new Action<company>(this.attach_companies), new Action<company>(this.detach_companies));
 			this._employees = new EntitySet<employee>(new Action<employee>(this.attach_employees), new Action<employee>(this.detach_employees));
 			this._employers = new EntitySet<employer>(new Action<employer>(this.attach_employers), new Action<employer>(this.detach_employers));
 			this._role = default(EntityRef<role>);
@@ -321,8 +354,8 @@ namespace WebJob.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_role", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string id_role
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_role", DbType="Int NOT NULL")]
+		public int id_role
 		{
 			get
 			{
@@ -362,6 +395,19 @@ namespace WebJob.Models
 					this.SendPropertyChanged("confirm");
 					this.OnconfirmChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="account_company", Storage="_companies", ThisKey="id_account", OtherKey="id_account")]
+		public EntitySet<company> companies
+		{
+			get
+			{
+				return this._companies;
+			}
+			set
+			{
+				this._companies.Assign(value);
 			}
 		}
 		
@@ -418,7 +464,7 @@ namespace WebJob.Models
 					}
 					else
 					{
-						this._id_role = default(string);
+						this._id_role = default(int);
 					}
 					this.SendPropertyChanged("role");
 				}
@@ -443,6 +489,18 @@ namespace WebJob.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_companies(company entity)
+		{
+			this.SendPropertyChanging();
+			entity.account = this;
+		}
+		
+		private void detach_companies(company entity)
+		{
+			this.SendPropertyChanging();
+			entity.account = null;
 		}
 		
 		private void attach_employees(employee entity)
@@ -470,6 +528,246 @@ namespace WebJob.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.apply_job")]
+	public partial class apply_job : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id_employee;
+		
+		private string _id_job_detail;
+		
+		private string _name_apply;
+		
+		private string _note;
+		
+		private string _cv_apply;
+		
+		private EntityRef<employee> _employee;
+		
+		private EntityRef<job_detail> _job_detail;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_employeeChanging(string value);
+    partial void Onid_employeeChanged();
+    partial void Onid_job_detailChanging(string value);
+    partial void Onid_job_detailChanged();
+    partial void Onname_applyChanging(string value);
+    partial void Onname_applyChanged();
+    partial void OnnoteChanging(string value);
+    partial void OnnoteChanged();
+    partial void Oncv_applyChanging(string value);
+    partial void Oncv_applyChanged();
+    #endregion
+		
+		public apply_job()
+		{
+			this._employee = default(EntityRef<employee>);
+			this._job_detail = default(EntityRef<job_detail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_employee", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id_employee
+		{
+			get
+			{
+				return this._id_employee;
+			}
+			set
+			{
+				if ((this._id_employee != value))
+				{
+					if (this._employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_employeeChanging(value);
+					this.SendPropertyChanging();
+					this._id_employee = value;
+					this.SendPropertyChanged("id_employee");
+					this.Onid_employeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_job_detail", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id_job_detail
+		{
+			get
+			{
+				return this._id_job_detail;
+			}
+			set
+			{
+				if ((this._id_job_detail != value))
+				{
+					if (this._job_detail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_job_detailChanging(value);
+					this.SendPropertyChanging();
+					this._id_job_detail = value;
+					this.SendPropertyChanged("id_job_detail");
+					this.Onid_job_detailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name_apply", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string name_apply
+		{
+			get
+			{
+				return this._name_apply;
+			}
+			set
+			{
+				if ((this._name_apply != value))
+				{
+					this.Onname_applyChanging(value);
+					this.SendPropertyChanging();
+					this._name_apply = value;
+					this.SendPropertyChanged("name_apply");
+					this.Onname_applyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="NVarChar(500)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this.OnnoteChanging(value);
+					this.SendPropertyChanging();
+					this._note = value;
+					this.SendPropertyChanged("note");
+					this.OnnoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cv_apply", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string cv_apply
+		{
+			get
+			{
+				return this._cv_apply;
+			}
+			set
+			{
+				if ((this._cv_apply != value))
+				{
+					this.Oncv_applyChanging(value);
+					this.SendPropertyChanging();
+					this._cv_apply = value;
+					this.SendPropertyChanged("cv_apply");
+					this.Oncv_applyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_apply_job", Storage="_employee", ThisKey="id_employee", OtherKey="id_employee", IsForeignKey=true)]
+		public employee employee
+		{
+			get
+			{
+				return this._employee.Entity;
+			}
+			set
+			{
+				employee previousValue = this._employee.Entity;
+				if (((previousValue != value) 
+							|| (this._employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._employee.Entity = null;
+						previousValue.apply_jobs.Remove(this);
+					}
+					this._employee.Entity = value;
+					if ((value != null))
+					{
+						value.apply_jobs.Add(this);
+						this._id_employee = value.id_employee;
+					}
+					else
+					{
+						this._id_employee = default(string);
+					}
+					this.SendPropertyChanged("employee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="job_detail_apply_job", Storage="_job_detail", ThisKey="id_job_detail", OtherKey="id_job_detail", IsForeignKey=true)]
+		public job_detail job_detail
+		{
+			get
+			{
+				return this._job_detail.Entity;
+			}
+			set
+			{
+				job_detail previousValue = this._job_detail.Entity;
+				if (((previousValue != value) 
+							|| (this._job_detail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._job_detail.Entity = null;
+						previousValue.apply_jobs.Remove(this);
+					}
+					this._job_detail.Entity = value;
+					if ((value != null))
+					{
+						value.apply_jobs.Add(this);
+						this._id_job_detail = value.id_job_detail;
+					}
+					else
+					{
+						this._id_job_detail = default(string);
+					}
+					this.SendPropertyChanged("job_detail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.comment_employee")]
 	public partial class comment_employee : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -487,6 +785,8 @@ namespace WebJob.Models
 		private System.Nullable<System.DateTime> _comment_date;
 		
 		private EntitySet<comment_employer> _comment_employers;
+		
+		private EntitySet<reply_comment> _reply_comments;
 		
 		private EntityRef<employee> _employee;
 		
@@ -509,6 +809,7 @@ namespace WebJob.Models
 		public comment_employee()
 		{
 			this._comment_employers = new EntitySet<comment_employer>(new Action<comment_employer>(this.attach_comment_employers), new Action<comment_employer>(this.detach_comment_employers));
+			this._reply_comments = new EntitySet<reply_comment>(new Action<reply_comment>(this.attach_reply_comments), new Action<reply_comment>(this.detach_reply_comments));
 			this._employee = default(EntityRef<employee>);
 			OnCreated();
 		}
@@ -630,6 +931,19 @@ namespace WebJob.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="comment_employee_reply_comment", Storage="_reply_comments", ThisKey="id_comments", OtherKey="id_comment")]
+		public EntitySet<reply_comment> reply_comments
+		{
+			get
+			{
+				return this._reply_comments;
+			}
+			set
+			{
+				this._reply_comments.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_comment_employee", Storage="_employee", ThisKey="id_employee", OtherKey="id_employee", IsForeignKey=true)]
 		public employee employee
 		{
@@ -691,6 +1005,18 @@ namespace WebJob.Models
 		}
 		
 		private void detach_comment_employers(comment_employer entity)
+		{
+			this.SendPropertyChanging();
+			entity.comment_employee = null;
+		}
+		
+		private void attach_reply_comments(reply_comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.comment_employee = this;
+		}
+		
+		private void detach_reply_comments(reply_comment entity)
 		{
 			this.SendPropertyChanging();
 			entity.comment_employee = null;
@@ -949,11 +1275,25 @@ namespace WebJob.Models
 		
 		private string _address;
 		
+		private string _email;
+		
 		private string _phonenumber;
+		
+		private string _active_status;
+		
+		private string _id_account;
+		
+		private string _logo;
+		
+		private EntitySet<employer> _employers;
 		
 		private EntitySet<following_company> _following_companies;
 		
 		private EntitySet<job> _jobs;
+		
+		private EntitySet<reply_comment> _reply_comments;
+		
+		private EntityRef<account> _account;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -965,14 +1305,25 @@ namespace WebJob.Models
     partial void Onname_companyChanged();
     partial void OnaddressChanging(string value);
     partial void OnaddressChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
     partial void OnphonenumberChanging(string value);
     partial void OnphonenumberChanged();
+    partial void Onactive_statusChanging(string value);
+    partial void Onactive_statusChanged();
+    partial void Onid_accountChanging(string value);
+    partial void Onid_accountChanged();
+    partial void OnlogoChanging(string value);
+    partial void OnlogoChanged();
     #endregion
 		
 		public company()
 		{
+			this._employers = new EntitySet<employer>(new Action<employer>(this.attach_employers), new Action<employer>(this.detach_employers));
 			this._following_companies = new EntitySet<following_company>(new Action<following_company>(this.attach_following_companies), new Action<following_company>(this.detach_following_companies));
 			this._jobs = new EntitySet<job>(new Action<job>(this.attach_jobs), new Action<job>(this.detach_jobs));
+			this._reply_comments = new EntitySet<reply_comment>(new Action<reply_comment>(this.attach_reply_comments), new Action<reply_comment>(this.detach_reply_comments));
+			this._account = default(EntityRef<account>);
 			OnCreated();
 		}
 		
@@ -1036,6 +1387,26 @@ namespace WebJob.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phonenumber", DbType="VarChar(12)")]
 		public string phonenumber
 		{
@@ -1053,6 +1424,83 @@ namespace WebJob.Models
 					this.SendPropertyChanged("phonenumber");
 					this.OnphonenumberChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="NChar(10)")]
+		public string active_status
+		{
+			get
+			{
+				return this._active_status;
+			}
+			set
+			{
+				if ((this._active_status != value))
+				{
+					this.Onactive_statusChanging(value);
+					this.SendPropertyChanging();
+					this._active_status = value;
+					this.SendPropertyChanged("active_status");
+					this.Onactive_statusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_account", DbType="VarChar(20)")]
+		public string id_account
+		{
+			get
+			{
+				return this._id_account;
+			}
+			set
+			{
+				if ((this._id_account != value))
+				{
+					if (this._account.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_accountChanging(value);
+					this.SendPropertyChanging();
+					this._id_account = value;
+					this.SendPropertyChanged("id_account");
+					this.Onid_accountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logo", DbType="NVarChar(MAX)")]
+		public string logo
+		{
+			get
+			{
+				return this._logo;
+			}
+			set
+			{
+				if ((this._logo != value))
+				{
+					this.OnlogoChanging(value);
+					this.SendPropertyChanging();
+					this._logo = value;
+					this.SendPropertyChanged("logo");
+					this.OnlogoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="company_employer", Storage="_employers", ThisKey="id_company", OtherKey="id_company")]
+		public EntitySet<employer> employers
+		{
+			get
+			{
+				return this._employers;
+			}
+			set
+			{
+				this._employers.Assign(value);
 			}
 		}
 		
@@ -1082,6 +1530,53 @@ namespace WebJob.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="company_reply_comment", Storage="_reply_comments", ThisKey="id_company", OtherKey="id_company")]
+		public EntitySet<reply_comment> reply_comments
+		{
+			get
+			{
+				return this._reply_comments;
+			}
+			set
+			{
+				this._reply_comments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="account_company", Storage="_account", ThisKey="id_account", OtherKey="id_account", IsForeignKey=true)]
+		public account account
+		{
+			get
+			{
+				return this._account.Entity;
+			}
+			set
+			{
+				account previousValue = this._account.Entity;
+				if (((previousValue != value) 
+							|| (this._account.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._account.Entity = null;
+						previousValue.companies.Remove(this);
+					}
+					this._account.Entity = value;
+					if ((value != null))
+					{
+						value.companies.Add(this);
+						this._id_account = value.id_account;
+					}
+					else
+					{
+						this._id_account = default(string);
+					}
+					this.SendPropertyChanged("account");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1100,6 +1595,18 @@ namespace WebJob.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_employers(employer entity)
+		{
+			this.SendPropertyChanging();
+			entity.company = this;
+		}
+		
+		private void detach_employers(employer entity)
+		{
+			this.SendPropertyChanging();
+			entity.company = null;
 		}
 		
 		private void attach_following_companies(following_company entity)
@@ -1121,6 +1628,18 @@ namespace WebJob.Models
 		}
 		
 		private void detach_jobs(job entity)
+		{
+			this.SendPropertyChanging();
+			entity.company = null;
+		}
+		
+		private void attach_reply_comments(reply_comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.company = this;
+		}
+		
+		private void detach_reply_comments(reply_comment entity)
 		{
 			this.SendPropertyChanging();
 			entity.company = null;
@@ -1269,11 +1788,17 @@ namespace WebJob.Models
 		
 		private string _id_account;
 		
+		private string _avatar;
+		
+		private EntitySet<apply_job> _apply_jobs;
+		
 		private EntitySet<comment_employee> _comment_employees;
 		
 		private EntitySet<following_company> _following_companies;
 		
 		private EntitySet<following_job> _following_jobs;
+		
+		private EntitySet<reply_comment> _reply_comments;
 		
 		private EntityRef<account> _account;
 		
@@ -1307,13 +1832,17 @@ namespace WebJob.Models
     partial void Onid_profileChanged();
     partial void Onid_accountChanging(string value);
     partial void Onid_accountChanged();
+    partial void OnavatarChanging(string value);
+    partial void OnavatarChanged();
     #endregion
 		
 		public employee()
 		{
+			this._apply_jobs = new EntitySet<apply_job>(new Action<apply_job>(this.attach_apply_jobs), new Action<apply_job>(this.detach_apply_jobs));
 			this._comment_employees = new EntitySet<comment_employee>(new Action<comment_employee>(this.attach_comment_employees), new Action<comment_employee>(this.detach_comment_employees));
 			this._following_companies = new EntitySet<following_company>(new Action<following_company>(this.attach_following_companies), new Action<following_company>(this.detach_following_companies));
 			this._following_jobs = new EntitySet<following_job>(new Action<following_job>(this.attach_following_jobs), new Action<following_job>(this.detach_following_jobs));
+			this._reply_comments = new EntitySet<reply_comment>(new Action<reply_comment>(this.attach_reply_comments), new Action<reply_comment>(this.detach_reply_comments));
 			this._account = default(EntityRef<account>);
 			this._cover_letter = default(EntityRef<cover_letter>);
 			this._profile = default(EntityRef<profile>);
@@ -1552,6 +2081,39 @@ namespace WebJob.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avatar", DbType="NVarChar(MAX)")]
+		public string avatar
+		{
+			get
+			{
+				return this._avatar;
+			}
+			set
+			{
+				if ((this._avatar != value))
+				{
+					this.OnavatarChanging(value);
+					this.SendPropertyChanging();
+					this._avatar = value;
+					this.SendPropertyChanged("avatar");
+					this.OnavatarChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_apply_job", Storage="_apply_jobs", ThisKey="id_employee", OtherKey="id_employee")]
+		public EntitySet<apply_job> apply_jobs
+		{
+			get
+			{
+				return this._apply_jobs;
+			}
+			set
+			{
+				this._apply_jobs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_comment_employee", Storage="_comment_employees", ThisKey="id_employee", OtherKey="id_employee")]
 		public EntitySet<comment_employee> comment_employees
 		{
@@ -1588,6 +2150,19 @@ namespace WebJob.Models
 			set
 			{
 				this._following_jobs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_reply_comment", Storage="_reply_comments", ThisKey="id_employee", OtherKey="id_employee")]
+		public EntitySet<reply_comment> reply_comments
+		{
+			get
+			{
+				return this._reply_comments;
+			}
+			set
+			{
+				this._reply_comments.Assign(value);
 			}
 		}
 		
@@ -1713,6 +2288,18 @@ namespace WebJob.Models
 			}
 		}
 		
+		private void attach_apply_jobs(apply_job entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = this;
+		}
+		
+		private void detach_apply_jobs(apply_job entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = null;
+		}
+		
 		private void attach_comment_employees(comment_employee entity)
 		{
 			this.SendPropertyChanging();
@@ -1748,6 +2335,18 @@ namespace WebJob.Models
 			this.SendPropertyChanging();
 			entity.employee = null;
 		}
+		
+		private void attach_reply_comments(reply_comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = this;
+		}
+		
+		private void detach_reply_comments(reply_comment entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.employer")]
@@ -1758,15 +2357,7 @@ namespace WebJob.Models
 		
 		private string _id_employer;
 		
-		private string _name_employer;
-		
-		private System.Nullable<System.DateTime> _day_birth_employer;
-		
-		private string _phonenumer_employer;
-		
-		private string _email;
-		
-		private string _active_status;
+		private string _id_company;
 		
 		private string _id_account;
 		
@@ -1774,22 +2365,16 @@ namespace WebJob.Models
 		
 		private EntityRef<account> _account;
 		
+		private EntityRef<company> _company;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void Onid_employerChanging(string value);
     partial void Onid_employerChanged();
-    partial void Onname_employerChanging(string value);
-    partial void Onname_employerChanged();
-    partial void Onday_birth_employerChanging(System.Nullable<System.DateTime> value);
-    partial void Onday_birth_employerChanged();
-    partial void Onphonenumer_employerChanging(string value);
-    partial void Onphonenumer_employerChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void Onactive_statusChanging(string value);
-    partial void Onactive_statusChanged();
+    partial void Onid_companyChanging(string value);
+    partial void Onid_companyChanged();
     partial void Onid_accountChanging(string value);
     partial void Onid_accountChanged();
     #endregion
@@ -1798,6 +2383,7 @@ namespace WebJob.Models
 		{
 			this._comment_employers = new EntitySet<comment_employer>(new Action<comment_employer>(this.attach_comment_employers), new Action<comment_employer>(this.detach_comment_employers));
 			this._account = default(EntityRef<account>);
+			this._company = default(EntityRef<company>);
 			OnCreated();
 		}
 		
@@ -1821,102 +2407,26 @@ namespace WebJob.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name_employer", DbType="NVarChar(200)")]
-		public string name_employer
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_company", DbType="VarChar(20)")]
+		public string id_company
 		{
 			get
 			{
-				return this._name_employer;
+				return this._id_company;
 			}
 			set
 			{
-				if ((this._name_employer != value))
+				if ((this._id_company != value))
 				{
-					this.Onname_employerChanging(value);
+					if (this._company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_companyChanging(value);
 					this.SendPropertyChanging();
-					this._name_employer = value;
-					this.SendPropertyChanged("name_employer");
-					this.Onname_employerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_day_birth_employer", DbType="DateTime")]
-		public System.Nullable<System.DateTime> day_birth_employer
-		{
-			get
-			{
-				return this._day_birth_employer;
-			}
-			set
-			{
-				if ((this._day_birth_employer != value))
-				{
-					this.Onday_birth_employerChanging(value);
-					this.SendPropertyChanging();
-					this._day_birth_employer = value;
-					this.SendPropertyChanged("day_birth_employer");
-					this.Onday_birth_employerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phonenumer_employer", DbType="VarChar(12)")]
-		public string phonenumer_employer
-		{
-			get
-			{
-				return this._phonenumer_employer;
-			}
-			set
-			{
-				if ((this._phonenumer_employer != value))
-				{
-					this.Onphonenumer_employerChanging(value);
-					this.SendPropertyChanging();
-					this._phonenumer_employer = value;
-					this.SendPropertyChanged("phonenumer_employer");
-					this.Onphonenumer_employerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(200)")]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active_status", DbType="NChar(10)")]
-		public string active_status
-		{
-			get
-			{
-				return this._active_status;
-			}
-			set
-			{
-				if ((this._active_status != value))
-				{
-					this.Onactive_statusChanging(value);
-					this.SendPropertyChanging();
-					this._active_status = value;
-					this.SendPropertyChanged("active_status");
-					this.Onactive_statusChanged();
+					this._id_company = value;
+					this.SendPropertyChanged("id_company");
+					this.Onid_companyChanged();
 				}
 			}
 		}
@@ -1988,6 +2498,40 @@ namespace WebJob.Models
 						this._id_account = default(string);
 					}
 					this.SendPropertyChanged("account");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="company_employer", Storage="_company", ThisKey="id_company", OtherKey="id_company", IsForeignKey=true)]
+		public company company
+		{
+			get
+			{
+				return this._company.Entity;
+			}
+			set
+			{
+				company previousValue = this._company.Entity;
+				if (((previousValue != value) 
+							|| (this._company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._company.Entity = null;
+						previousValue.employers.Remove(this);
+					}
+					this._company.Entity = value;
+					if ((value != null))
+					{
+						value.employers.Add(this);
+						this._id_company = value.id_company;
+					}
+					else
+					{
+						this._id_company = default(string);
+					}
+					this.SendPropertyChanged("company");
 				}
 			}
 		}
@@ -2422,10 +2966,6 @@ namespace WebJob.Models
 			{
 				if ((this._id_job != value))
 				{
-					if (this._job_title.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.Onid_jobChanging(value);
 					this.SendPropertyChanging();
 					this._id_job = value;
@@ -2530,6 +3070,10 @@ namespace WebJob.Models
 			{
 				if ((this._id_title != value))
 				{
+					if (this._job_title.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.Onid_titleChanging(value);
 					this.SendPropertyChanging();
 					this._id_title = value;
@@ -2586,7 +3130,7 @@ namespace WebJob.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="job_title_job", Storage="_job_title", ThisKey="id_job", OtherKey="id_title", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="job_title_job", Storage="_job_title", ThisKey="id_title", OtherKey="id_title", IsForeignKey=true)]
 		public job_title job_title
 		{
 			get
@@ -2603,17 +3147,17 @@ namespace WebJob.Models
 					if ((previousValue != null))
 					{
 						this._job_title.Entity = null;
-						previousValue.job = null;
+						previousValue.jobs.Remove(this);
 					}
 					this._job_title.Entity = value;
 					if ((value != null))
 					{
-						value.job = this;
-						this._id_job = value.id_title;
+						value.jobs.Add(this);
+						this._id_title = value.id_title;
 					}
 					else
 					{
-						this._id_job = default(string);
+						this._id_title = default(string);
 					}
 					this.SendPropertyChanged("job_title");
 				}
@@ -2669,6 +3213,8 @@ namespace WebJob.Models
 		
 		private string _id_skill;
 		
+		private EntitySet<apply_job> _apply_jobs;
+		
 		private EntitySet<following_job> _following_jobs;
 		
 		private EntityRef<job> _job;
@@ -2693,6 +3239,7 @@ namespace WebJob.Models
 		
 		public job_detail()
 		{
+			this._apply_jobs = new EntitySet<apply_job>(new Action<apply_job>(this.attach_apply_jobs), new Action<apply_job>(this.detach_apply_jobs));
 			this._following_jobs = new EntitySet<following_job>(new Action<following_job>(this.attach_following_jobs), new Action<following_job>(this.detach_following_jobs));
 			this._job = default(EntityRef<job>);
 			this._job_skill = default(EntityRef<job_skill>);
@@ -2807,6 +3354,19 @@ namespace WebJob.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="job_detail_apply_job", Storage="_apply_jobs", ThisKey="id_job_detail", OtherKey="id_job_detail")]
+		public EntitySet<apply_job> apply_jobs
+		{
+			get
+			{
+				return this._apply_jobs;
+			}
+			set
+			{
+				this._apply_jobs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="job_detail_following_job", Storage="_following_jobs", ThisKey="id_job_detail", OtherKey="id_job_detail")]
 		public EntitySet<following_job> following_jobs
 		{
@@ -2906,6 +3466,18 @@ namespace WebJob.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_apply_jobs(apply_job entity)
+		{
+			this.SendPropertyChanging();
+			entity.job_detail = this;
+		}
+		
+		private void detach_apply_jobs(apply_job entity)
+		{
+			this.SendPropertyChanging();
+			entity.job_detail = null;
 		}
 		
 		private void attach_following_jobs(following_job entity)
@@ -3045,7 +3617,7 @@ namespace WebJob.Models
 		
 		private string _name_title;
 		
-		private EntityRef<job> _job;
+		private EntitySet<job> _jobs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3059,7 +3631,7 @@ namespace WebJob.Models
 		
 		public job_title()
 		{
-			this._job = default(EntityRef<job>);
+			this._jobs = new EntitySet<job>(new Action<job>(this.attach_jobs), new Action<job>(this.detach_jobs));
 			OnCreated();
 		}
 		
@@ -3103,32 +3675,16 @@ namespace WebJob.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="job_title_job", Storage="_job", ThisKey="id_title", OtherKey="id_job", IsUnique=true, IsForeignKey=false)]
-		public job job
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="job_title_job", Storage="_jobs", ThisKey="id_title", OtherKey="id_title")]
+		public EntitySet<job> jobs
 		{
 			get
 			{
-				return this._job.Entity;
+				return this._jobs;
 			}
 			set
 			{
-				job previousValue = this._job.Entity;
-				if (((previousValue != value) 
-							|| (this._job.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._job.Entity = null;
-						previousValue.job_title = null;
-					}
-					this._job.Entity = value;
-					if ((value != null))
-					{
-						value.job_title = this;
-					}
-					this.SendPropertyChanged("job");
-				}
+				this._jobs.Assign(value);
 			}
 		}
 		
@@ -3150,6 +3706,18 @@ namespace WebJob.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_jobs(job entity)
+		{
+			this.SendPropertyChanging();
+			entity.job_title = this;
+		}
+		
+		private void detach_jobs(job entity)
+		{
+			this.SendPropertyChanging();
+			entity.job_title = null;
 		}
 	}
 	
@@ -3425,13 +3993,318 @@ namespace WebJob.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.reply_comment")]
+	public partial class reply_comment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id_comment_reply;
+		
+		private string _content;
+		
+		private System.Nullable<System.DateTime> _date_reply;
+		
+		private string _id_company;
+		
+		private string _id_employee;
+		
+		private string _id_comment;
+		
+		private EntityRef<comment_employee> _comment_employee;
+		
+		private EntityRef<company> _company;
+		
+		private EntityRef<employee> _employee;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_comment_replyChanging(string value);
+    partial void Onid_comment_replyChanged();
+    partial void OncontentChanging(string value);
+    partial void OncontentChanged();
+    partial void Ondate_replyChanging(System.Nullable<System.DateTime> value);
+    partial void Ondate_replyChanged();
+    partial void Onid_companyChanging(string value);
+    partial void Onid_companyChanged();
+    partial void Onid_employeeChanging(string value);
+    partial void Onid_employeeChanged();
+    partial void Onid_commentChanging(string value);
+    partial void Onid_commentChanged();
+    #endregion
+		
+		public reply_comment()
+		{
+			this._comment_employee = default(EntityRef<comment_employee>);
+			this._company = default(EntityRef<company>);
+			this._employee = default(EntityRef<employee>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_comment_reply", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id_comment_reply
+		{
+			get
+			{
+				return this._id_comment_reply;
+			}
+			set
+			{
+				if ((this._id_comment_reply != value))
+				{
+					this.Onid_comment_replyChanging(value);
+					this.SendPropertyChanging();
+					this._id_comment_reply = value;
+					this.SendPropertyChanged("id_comment_reply");
+					this.Onid_comment_replyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_content", DbType="NVarChar(MAX)")]
+		public string content
+		{
+			get
+			{
+				return this._content;
+			}
+			set
+			{
+				if ((this._content != value))
+				{
+					this.OncontentChanging(value);
+					this.SendPropertyChanging();
+					this._content = value;
+					this.SendPropertyChanged("content");
+					this.OncontentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_reply", DbType="DateTime")]
+		public System.Nullable<System.DateTime> date_reply
+		{
+			get
+			{
+				return this._date_reply;
+			}
+			set
+			{
+				if ((this._date_reply != value))
+				{
+					this.Ondate_replyChanging(value);
+					this.SendPropertyChanging();
+					this._date_reply = value;
+					this.SendPropertyChanged("date_reply");
+					this.Ondate_replyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_company", DbType="VarChar(20)")]
+		public string id_company
+		{
+			get
+			{
+				return this._id_company;
+			}
+			set
+			{
+				if ((this._id_company != value))
+				{
+					if (this._company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_companyChanging(value);
+					this.SendPropertyChanging();
+					this._id_company = value;
+					this.SendPropertyChanged("id_company");
+					this.Onid_companyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_employee", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string id_employee
+		{
+			get
+			{
+				return this._id_employee;
+			}
+			set
+			{
+				if ((this._id_employee != value))
+				{
+					if (this._employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_employeeChanging(value);
+					this.SendPropertyChanging();
+					this._id_employee = value;
+					this.SendPropertyChanged("id_employee");
+					this.Onid_employeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_comment", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string id_comment
+		{
+			get
+			{
+				return this._id_comment;
+			}
+			set
+			{
+				if ((this._id_comment != value))
+				{
+					if (this._comment_employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_commentChanging(value);
+					this.SendPropertyChanging();
+					this._id_comment = value;
+					this.SendPropertyChanged("id_comment");
+					this.Onid_commentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="comment_employee_reply_comment", Storage="_comment_employee", ThisKey="id_comment", OtherKey="id_comments", IsForeignKey=true)]
+		public comment_employee comment_employee
+		{
+			get
+			{
+				return this._comment_employee.Entity;
+			}
+			set
+			{
+				comment_employee previousValue = this._comment_employee.Entity;
+				if (((previousValue != value) 
+							|| (this._comment_employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._comment_employee.Entity = null;
+						previousValue.reply_comments.Remove(this);
+					}
+					this._comment_employee.Entity = value;
+					if ((value != null))
+					{
+						value.reply_comments.Add(this);
+						this._id_comment = value.id_comments;
+					}
+					else
+					{
+						this._id_comment = default(string);
+					}
+					this.SendPropertyChanged("comment_employee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="company_reply_comment", Storage="_company", ThisKey="id_company", OtherKey="id_company", IsForeignKey=true)]
+		public company company
+		{
+			get
+			{
+				return this._company.Entity;
+			}
+			set
+			{
+				company previousValue = this._company.Entity;
+				if (((previousValue != value) 
+							|| (this._company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._company.Entity = null;
+						previousValue.reply_comments.Remove(this);
+					}
+					this._company.Entity = value;
+					if ((value != null))
+					{
+						value.reply_comments.Add(this);
+						this._id_company = value.id_company;
+					}
+					else
+					{
+						this._id_company = default(string);
+					}
+					this.SendPropertyChanged("company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_reply_comment", Storage="_employee", ThisKey="id_employee", OtherKey="id_employee", IsForeignKey=true)]
+		public employee employee
+		{
+			get
+			{
+				return this._employee.Entity;
+			}
+			set
+			{
+				employee previousValue = this._employee.Entity;
+				if (((previousValue != value) 
+							|| (this._employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._employee.Entity = null;
+						previousValue.reply_comments.Remove(this);
+					}
+					this._employee.Entity = value;
+					if ((value != null))
+					{
+						value.reply_comments.Add(this);
+						this._id_employee = value.id_employee;
+					}
+					else
+					{
+						this._id_employee = default(string);
+					}
+					this.SendPropertyChanged("employee");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.role")]
 	public partial class role : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _id_role;
+		private int _id_role;
 		
 		private string _name_role;
 		
@@ -3441,7 +4314,7 @@ namespace WebJob.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void Onid_roleChanging(string value);
+    partial void Onid_roleChanging(int value);
     partial void Onid_roleChanged();
     partial void Onname_roleChanging(string value);
     partial void Onname_roleChanged();
@@ -3453,8 +4326,8 @@ namespace WebJob.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_role", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id_role
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_role", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id_role
 		{
 			get
 			{
@@ -3536,6 +4409,69 @@ namespace WebJob.Models
 		{
 			this.SendPropertyChanging();
 			entity.role = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.token")]
+	public partial class token
+	{
+		
+		private string _Token1;
+		
+		private System.DateTime _time1;
+		
+		private System.DateTime _time2;
+		
+		public token()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Token", Storage="_Token1", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Token1
+		{
+			get
+			{
+				return this._Token1;
+			}
+			set
+			{
+				if ((this._Token1 != value))
+				{
+					this._Token1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time1", DbType="DateTime NOT NULL")]
+		public System.DateTime time1
+		{
+			get
+			{
+				return this._time1;
+			}
+			set
+			{
+				if ((this._time1 != value))
+				{
+					this._time1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time2", DbType="DateTime NOT NULL")]
+		public System.DateTime time2
+		{
+			get
+			{
+				return this._time2;
+			}
+			set
+			{
+				if ((this._time2 != value))
+				{
+					this._time2 = value;
+				}
+			}
 		}
 	}
 }

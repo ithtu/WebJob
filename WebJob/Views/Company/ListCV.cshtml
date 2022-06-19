@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebJob.Models.apply_job>
+
+@{
+    ViewBag.Title = "ListCV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/register.css" rel="stylesheet" />
+<link href="~/Content/list.css" rel="stylesheet" />
+<link href="~/Content/Body.css" rel="stylesheet" />
+<link href="~/Content/save.css" rel="stylesheet" />
+<div class="container">
+    <div class="main-content container-fluid" id="homepage">
+        <div class="job-skill-indices">
+            <h1 class="job-skill-index-headline">List Apply</h1>
+            <table class="table">
+                <tr>
+                    <th>
+                       Job's Name
+
+                    </th>
+                    <th>
+                        Apply's Name
+                    </th>
+                    <th>
+                        Note
+                    </th>
+                    <th>
+                        File's CV
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.job_detail.job.name)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name_apply)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.note)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cv_apply)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Download", "Download", new { fileName = item.cv_apply })
+
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+

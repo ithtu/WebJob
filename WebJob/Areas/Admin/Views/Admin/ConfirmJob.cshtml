@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebJob.Models.job_detail>
+
+@{
+    ViewBag.Title = "ConfirmJob";
+    Layout = "~/Areas/Admin/Views/Shared/Adlayout.cshtml";
+}
+
+<h2>ConfirmJob</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Job's Name
+        </th>
+        <th>
+            Company
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.job.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.job.company.name_company)
+        </td>
+        
+        <td>
+            <button data-job-id="@item.id_job_detail" class="btn btn-info accept">Accept</button>
+            <button data-job-id="@item.id_job_detail" class="btn btn-danger delete">Cancel</button>
+
+        </td>
+    </tr>
+}
+
+</table>
+<script>
+    $(".accept").click(function (e) {
+        var button = $(e.target);
+        $.post("/Admin/Admin/ConfirmJobs", { id: button.attr("data-job-id") })
+            .done(function () {
+                location.reload();
+            }).fail(function () {
+                alert("Cần đăng nhập!");
+            });
+    });
+    $(".delete").click(function (e) {
+        var button = $(e.target);
+        $.post("/Admin/Admin/DelConfirmJob", { id: button.attr("data-job-id") })
+            .done(function () {
+                location.reload();
+            }).fail(function () {
+                alert("Cần đăng nhập!");
+            });
+    });
+</script>

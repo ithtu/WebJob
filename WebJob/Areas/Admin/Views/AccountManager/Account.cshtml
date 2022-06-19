@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebJob.Models.account>
+
+@{
+    ViewBag.Title = "AdIndex";
+    Layout = "~/Areas/Admin/Views/Shared/Adlayout.cshtml";
+}
+
+<h2>Account Manager</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID Account
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.confirm)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id_account
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.confirm)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id_account }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id_account }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id_account })
+            </td>
+        </tr>
+    }
+
+</table>

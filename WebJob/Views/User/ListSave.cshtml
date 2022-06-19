@@ -1,0 +1,170 @@
+﻿@model IEnumerable<WebJob.Models.following_job>
+@{
+    ViewBag.Title = "ListSave";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Body.css" rel="stylesheet" />
+<link href="~/Content/save.css" rel="stylesheet" />
+<div class="container">
+    <div class="hidden-xs" data-action="click->scroll-top#scrollToTop" data-controller="scroll-top" id="scrolltop">
+        <div class="top-arrow"></div>
+    </div>
+    <div class="saved-jobs-page">
+       
+        <div class="saved-jobs">
+            @if (Model.Count() == 0)
+            {
+                <h1 class="saved-jobs__headline"> Ban chua save job nao</h1>
+            }
+            else
+            {
+                <h1 class="saved-jobs__headline">
+                    
+                    You have @Model.Count() Saved Job
+                </h1>
+                <div class="saved-jobs__jobs">
+                    @foreach (var item in Model)
+                    {
+                        <div class="job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-slug-value="20-application-developers-java-net-c-kien-long-bank-5232" data-search--job-selection-job-url-value="/it-jobs/20-application-developers-java-net-c-kien-long-bank-5232/content?locale=en">
+                            <div class="job_content">
+                                <div class="logo">
+                                    <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Kien Long Bank">
+                                        <a target="_blank" href="/companies/kien-long-bank">
+                                            <picture>
+                                                <img src="~/Content/images/logo-bk.png" /> @*logo*@
+                                            </picture>
+                                        </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="saved-wrapper" data-controller="jobs--save" id="2868a0ca-650e-40a1-86ce-1005b0f5a54b">
+                                        <div class="job-details__apply">
+                                            <div class="job-details__apply-box">
+
+                                                <div class="job-details__save-job">
+                                                    @if (item.job_detail.isFollowing)
+                                                    {
+                                                        <i data-job-id="@item.job_detail.id_job_detail" class="far fa-heart js-tongle-follow" style="color:black; color:red; cursor: pointer"></i>
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <i data-job-id="@item.job_detail.id_job_detail" class="fa fa-heart js-tongle-unfollow" style="color:red; cursor: pointer"></i>
+
+
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="job__description">
+                                    <div class="job__body">
+                                        <div class="details">
+                                            <h3 class="title job-details-link-wrapper">
+                                                <a target="_blank" data-controller="utm-tracking" href="#">@item.job_detail.job.name (Java/.NET/C#)</a>
+                                            </h3>
+                                            <div class="svg-icon svg-icon--rounded svg-icon--green">
+                                                <svg class="svg-icon__icon">
+                                                    <use xlink:href="#usd_icon"></use>
+                                                </svg>
+                                                <div class="svg-icon__text">1,000 - 2,000 USD</div>
+                                            </div>
+                                            <div class="d-none d-sm-block">
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <div class="city">
+                                                    <div class="text">Company address</div>
+                                                </div>
+                                                <span class="text">
+                                                    Expires on
+                                                    <span class="day">
+                                                        35
+                                                    </span>
+                                                    days
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="job-bottom">
+                                        <div class="tag-list">
+                                            <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/it-jobs/java">
+                                                <span>
+                                                    Java
+                                                </span>
+                                            </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/it-jobs/csharp">
+                                                <span>
+                                                    C#
+                                                </span>
+                                            </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/it-jobs/.net">
+                                                <span>
+                                                    .NET
+                                                </span>
+                                            </a>
+                                            <div class="visible-xs d-sm-none">
+                                                <div class="distance-time-job-posted">
+                                                    <span class="distance-time highlight">
+                                                        26m
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="city_and_posted_date d-none d-sm-flex">
+                                    <span class="text nowrap">
+                                        Expires on
+                                        <span class="">35</span>
+                                        days
+                                    </span>
+                                    <div class="city">
+                                        <div class="address">
+                                            <div class="text">company adress</div>
+                                        </div>
+                                    </div>
+                                    <div class="distance-time-job-posted">
+                                        <span class="distance-time highlight">
+                                            26m
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<script>
+    $(".js-tongle-follow").click(function (e) {
+        var button = $(e.target);
+        $.post("/Jobs/SaveJob", { id: button.attr("data-job-id") })
+            .done(function () {
+                button.removeClass("far fa-heart");
+                button.addClass("fa fa-heart");
+                location.reload();
+            }).fail(function () {
+                alert("Đã follow, vui lòng chọn khóa học khác!");
+            });
+    });
+    $(".js-tongle-unfollow").click(function (e) {
+        var button = $(e.target);
+        $.post("/Jobs/SaveJob", { id: button.attr("data-job-id") })
+            .done(function () {
+                button.removeClass("fa fa-heart");
+                button.addClass("far fa-heart");
+                location.reload();
+
+            }).fail(function () {
+                alert("Đã follow, vui lòng chọn khóa học khác!");
+            });
+    });
+</script>
+
+

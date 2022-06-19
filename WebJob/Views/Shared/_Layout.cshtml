@@ -14,7 +14,9 @@
 
     <div class="header-overlay"></div>
 
-    @Html.Partial("~/Views/Shared/_Header.cshtml")
+    @{
+        Html.RenderAction("RenderNav", "Home");
+    }
     @RenderBody()
     @Html.Partial("~/Views/Shared/footer.cshtml")
     <hr />
@@ -25,9 +27,11 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/jquery.validate.min.js"></script>
     @RenderSection("scripts", required: false)
-    
-    
+    @RenderSection("upload", required: false)
 
-   
+
+
+
+
 </body>
 </html>

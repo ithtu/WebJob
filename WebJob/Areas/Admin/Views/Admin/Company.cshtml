@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebJob.Models.company>
+
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Areas/Admin/Views/Shared/Adlayout.cshtml";
+}
+
+<h2>List - Company</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Logo
+        </th>
+        <th>
+            Company's Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone's Number
+        </th>
+
+        <th>
+            Account's ID
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img style="width: 45px; height: 30px"  src="@item.logo"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name_company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phonenumber)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.id_account)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_company }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_company }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_company })
+        </td>
+    </tr>
+}
+
+</table>

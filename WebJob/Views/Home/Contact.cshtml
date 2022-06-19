@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@model WebJob.Models.employee
+@{
+    ViewBag.Title = "Index";
 }
 <link href="~/Content/home.css" rel="stylesheet" />
 <link href="~/Content/search.css" rel="stylesheet" />
@@ -8,8 +9,13 @@
     <div class="search-header search-header--black">
         <div class="search-form-wrapper search-form-wrapper--loose clearfix">
             <h1 class="slogan">
-                1,944 Việc Làm IT Chất
-                <br class="br-on-mobile">Dành Cho 7405_Nguyễn Quốc Tú<br>
+                Việc Làm IT Chất
+                @if (Session["account"] != null)
+                {
+                    <span>Dành cho</span>
+                    <br class="br-on-mobile">@Session["name"]<br>
+                }
+
             </h1>
             <form id="search_form" class="search-form" data-controller="search--autocomplete" data-search--autocomplete-seo-url-value="https://itviec.com/viec-lam-it" data-search--autocomplete-query-source-url-value="/api/v1/tags/populars" data-search--autocomplete-recent-searches-value=".net" action="/viec-lam-it" accept-charset="UTF-8" method="get">
                 <div class="search-form__keyword-section rounded">

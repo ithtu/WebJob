@@ -271,7 +271,7 @@ headers__info__item-location {
 }
 .jobs>.panel-body {
     position: absolute;
-    top: 0;
+    top: 50px;
     left: 0;
     width: 100%;
     height: 100%;

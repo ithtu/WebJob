@@ -1,7 +1,9 @@
-﻿
+﻿@model WebJob.Models.job
+    @using WebJob.Models
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var list = (List<job_detail>)ViewBag.JobCompany;
 }
 <link href="~/Content/company.css" rel="stylesheet" />
 <link href="~/Content/Body.css" rel="stylesheet" />
@@ -15,14 +17,13 @@
                     <div class="headers__logo">
                         <div class="headers__logo__img">
                             <picture>
-                                <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oSnlaWE5wZW1WZmRHOWZabWwwV3dkcEFhb3ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a364054a300021d6ece7f71365132a9777e89a21/download.png">
-                                <img alt="Ngân Hàng Á Châu | ACB Vietnam Big Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/download.png" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtCcWpBPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--623b1a923c4c6ecbacda77c459f93960558db010/download.png">
+                            <img src="@Model.company.logo" />    
                             </picture>
                         </div>
                     </div>
                     <div class="headers__info">
                         <h1 class="headers__info__name">
-                            Ngân Hàng Á Châu | ACB
+                           @Model.company.name_company
                         </h1>
                         <div class="headers__info__item">
 
@@ -80,7 +81,17 @@
                     </div>
                     <div class="headers__actions">
                         <a class="button ibutton full-width ibutton-red" rel="nofollow" href="/companies/ngan-hang-a-chau-acb/review/new?utm_campaign=button_feature_review&amp;utm_medium=new_review&amp;utm_source=emp_page">Viết review</a>
-                        <form id="follow-form" data-controller="employers--follow" data-employers--follow-yeah-robby-url-value="https://itviec.com/assets/roby-jrjdyeah-f2374e5dc33afdf35884e55c8e6ac807048f9b5e4e37b365f5558dde5cc9f116.png" data-employers--follow-sad-robby-url-value="https://itviec.com/assets/robby-sad-a1fb55a6e3945a12eff5fb75d5bbf4e34784cea4ae905ac0a90a7c2b76507983.png" data-action="ajax:success->employers--follow#success ajax:error->employers--follow#error" data-confirm-email-for-jr="true" class="button_to" method="post" action="/companies/ngan-hang-a-chau-acb/followings?locale=vi" data-remote="true"><button id="follow-button" class="loadable ibutton ibutton-follow full-width" data-disable="true" type="submit">Theo dõi</button><input type="hidden" name="authenticity_token" value="nqU78JeIYu04G9Vd_kzGw1IRAfOY3eoZQ6Bl7Z6V82r3a_lx3f7y8d9-OJ75Q3kZCNWvo1e5TSuXuDWWCayZiA" autocomplete="off"></form>
+                        <form id="follow-form">
+                            @if (Model.company.isFollowing)
+                            {
+                                <button id="follow-button" class="loadable ibutton ibutton-follow full-width" data-company-id="@Model.id_company">Theo dõi</button>
+                            }
+                            else
+                            {
+                                <button id="follow-button" class="loadable ibutton ibutton-follow full-width" data-company-id="@Model.id_company">Đang theo dõi</button>
+                            }
+
+                        </form>
                     </div>
                 </div>
                 <div class="company-page__container">
@@ -101,507 +112,97 @@
                         </ul>
                         <div class="panel panel-default jobs">
                             <div class="panel-heading">
-                                <h2 class="panel-title">Ngân Hàng Á Châu | ACB Tuyển Dụng</h2>
+                                <h2 class="panel-title">@Model.company.name_company Tuyển Dụng</h2>
                             </div>
                             <div class="panel-body">
-                                <div class="job super-hot-job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-url-value="/it-jobs/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040/content?locale=vi">
-                                    <div class="job_content">
-                                        <div class="logo">
-                                            <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
-                                                <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
-                                                    <picture>
-                                                        <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
-                                                        <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="job__description">
-                                            <div class="job__body">
-                                                <div class="details">
-                                                    <h3 class="title job-details-link-wrapper">
-                                                        <a target="_blank" data-controller="utm-tracking" href="/viec-lam-it/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040?lab_feature=employer_job">Back-End Engineer (NodeJS, .Net, Python)</a>
-                                                    </h3>
-                                                    <div class="svg-icon svg-icon--rounded svg-icon--green">
-                                                        <svg class="svg-icon__icon">
-                                                            <use xlink:href="#usd_icon"></use>
-                                                        </svg>
-                                                        <div class="svg-icon__text">You'll love it</div>
-                                                    </div>
-                                                    <div class="d-none d-sm-block">
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="d-sm-none">
-                                                        <div class="city">
-                                                            <div class="text">Ho Chi Minh</div>
-                                                        </div>
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="job-bottom">
-                                                <div class="tag-list">
-                                                    <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/python/ha-noi">
-                                                        <span>
-                                                            Python
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/nodejs/ha-noi">
-                                                        <span>
-                                                            NodeJS
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">
-                                                        <span>
-                                                            .NET
-                                                        </span>
+                                @foreach (var item in list)
+                                {
+                                    <div class="job super-hot-job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-url-value="/it-jobs/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040/content?locale=vi">
+                                        <div class="job_content">
+                                            <div class="logo">
+                                                <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
+                                                    <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
+                                                        <picture>
+                                                            <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
+                                                            <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
+                                                        </picture>
                                                     </a>
-                                                    <div class="visible-xs d-sm-none">
-                                                        <div class="distance-time-job-posted">
-                                                            <span class="distance-time">
-                                                                21 ngày trước
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="job__description">
+                                                <div class="job__body">
+                                                    <div class="details">
+                                                        <h3 class="title job-details-link-wrapper">
+                                                            <a target="_blank" data-controller="utm-tracking" href="@Url.Action("Details","Jobs", new {id = item.id_job_detail })">@item.job.name </a>
+                                                        </h3>
+                                                        <div class="svg-icon svg-icon--rounded svg-icon--green">
+                                                            <svg class="svg-icon__icon">
+                                                                <use xlink:href="#usd_icon"></use>
+                                                            </svg>
+                                                            <div class="svg-icon__text">You'll love it</div>
+                                                        </div>
+                                                        <div class="d-none d-sm-block">
+                                                            <ul class="benefits">
+                                                                <li>Phúc lợi siêu hấp dẫn tại ACB</li>
+                                                                <li>Lương cực kỳ cạnh tranh</li>
+                                                                <li>Áp dụng công nghệ mới nhất</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="d-sm-none">
+                                                            <div class="city">
+                                                                <div class="text">@item.job.company.name_company</div>
+                                                            </div>
+                                                            <ul class="benefits">
+                                                                <li>Phúc lợi siêu hấp dẫn tại ACB</li>
+                                                                <li>Lương cực kỳ cạnh tranh</li>
+                                                                <li>Áp dụng công nghệ mới nhất</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="job-bottom">
+                                                    <div class="tag-list">
+                                                        <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/python/ha-noi">
+                                                            <span>
+                                                                Python
                                                             </span>
+                                                        </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/nodejs/ha-noi">
+                                                            <span>
+                                                                NodeJS
+                                                            </span>
+                                                        </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">
+                                                            <span>
+                                                                .NET
+                                                            </span>
+                                                        </a>
+                                                        <div class="visible-xs d-sm-none">
+                                                            <div class="distance-time-job-posted">
+                                                                <span class="distance-time">
+                                                                    21 ngày trước
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="city_and_posted_date d-none d-sm-flex">
-                                            <div class="city">
-                                                <div class="address">
-                                                    <div class="text">Ho Chi Minh</div>
+                                            <div class="city_and_posted_date d-none d-sm-flex">
+                                                <div class="city">
+                                                    <div class="address">
+                                                        <div class="text">Ho Chi Minh</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="distance-time-job-posted">
-                                                <span class="distance-time">
-                                                    21 ngày trước
-                                                </span>
+                                                <div class="distance-time-job-posted">
+                                                    <span class="distance-time">
+                                                        21 ngày trước
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="job super-hot-job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-url-value="/it-jobs/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040/content?locale=vi">
-                                    <div class="job_content">
-                                        <div class="logo">
-                                            <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
-                                                <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
-                                                    <picture>
-                                                        <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
-                                                        <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="job__description">
-                                            <div class="job__body">
-                                                <div class="details">
-                                                    <h3 class="title job-details-link-wrapper">
-                                                        <a target="_blank" data-controller="utm-tracking" href="/viec-lam-it/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040?lab_feature=employer_job">Back-End Engineer (NodeJS, .Net, Python)</a>
-                                                    </h3>
-                                                    <div class="svg-icon svg-icon--rounded svg-icon--green">
-                                                        <svg class="svg-icon__icon">
-                                                            <use xlink:href="#usd_icon"></use>
-                                                        </svg>
-                                                        <div class="svg-icon__text">You'll love it</div>
-                                                    </div>
-                                                    <div class="d-none d-sm-block">
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="d-sm-none">
-                                                        <div class="city">
-                                                            <div class="text">Ho Chi Minh</div>
-                                                        </div>
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="job-bottom">
-                                                <div class="tag-list">
-                                                    <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/python/ha-noi">
-                                                        <span>
-                                                            Python
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/nodejs/ha-noi">
-                                                        <span>
-                                                            NodeJS
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">
-                                                        <span>
-                                                            .NET
-                                                        </span>
-                                                    </a>
-                                                    <div class="visible-xs d-sm-none">
-                                                        <div class="distance-time-job-posted">
-                                                            <span class="distance-time">
-                                                                21 ngày trước
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="city_and_posted_date d-none d-sm-flex">
-                                            <div class="city">
-                                                <div class="address">
-                                                    <div class="text">Ho Chi Minh</div>
-                                                </div>
-                                            </div>
-                                            <div class="distance-time-job-posted">
-                                                <span class="distance-time">
-                                                    21 ngày trước
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="job super-hot-job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-url-value="/it-jobs/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040/content?locale=vi">
-                                    <div class="job_content">
-                                        <div class="logo">
-                                            <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
-                                                <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
-                                                    <picture>
-                                                        <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
-                                                        <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="job__description">
-                                            <div class="job__body">
-                                                <div class="details">
-                                                    <h3 class="title job-details-link-wrapper">
-                                                        <a target="_blank" data-controller="utm-tracking" href="/viec-lam-it/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040?lab_feature=employer_job">Back-End Engineer (NodeJS, .Net, Python)</a>
-                                                    </h3>
-                                                    <div class="svg-icon svg-icon--rounded svg-icon--green">
-                                                        <svg class="svg-icon__icon">
-                                                            <use xlink:href="#usd_icon"></use>
-                                                        </svg>
-                                                        <div class="svg-icon__text">You'll love it</div>
-                                                    </div>
-                                                    <div class="d-none d-sm-block">
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="d-sm-none">
-                                                        <div class="city">
-                                                            <div class="text">Ho Chi Minh</div>
-                                                        </div>
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="job-bottom">
-                                                <div class="tag-list">
-                                                    <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/python/ha-noi">
-                                                        <span>
-                                                            Python
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/nodejs/ha-noi">
-                                                        <span>
-                                                            NodeJS
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">
-                                                        <span>
-                                                            .NET
-                                                        </span>
-                                                    </a>
-                                                    <div class="visible-xs d-sm-none">
-                                                        <div class="distance-time-job-posted">
-                                                            <span class="distance-time">
-                                                                21 ngày trước
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="city_and_posted_date d-none d-sm-flex">
-                                            <div class="city">
-                                                <div class="address">
-                                                    <div class="text">Ho Chi Minh</div>
-                                                </div>
-                                            </div>
-                                            <div class="distance-time-job-posted">
-                                                <span class="distance-time">
-                                                    21 ngày trước
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="job super-hot-job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-url-value="/it-jobs/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040/content?locale=vi">
-                                    <div class="job_content">
-                                        <div class="logo">
-                                            <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
-                                                <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
-                                                    <picture>
-                                                        <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
-                                                        <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="job__description">
-                                            <div class="job__body">
-                                                <div class="details">
-                                                    <h3 class="title job-details-link-wrapper">
-                                                        <a target="_blank" data-controller="utm-tracking" href="/viec-lam-it/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040?lab_feature=employer_job">Back-End Engineer (NodeJS, .Net, Python)</a>
-                                                    </h3>
-                                                    <div class="svg-icon svg-icon--rounded svg-icon--green">
-                                                        <svg class="svg-icon__icon">
-                                                            <use xlink:href="#usd_icon"></use>
-                                                        </svg>
-                                                        <div class="svg-icon__text">You'll love it</div>
-                                                    </div>
-                                                    <div class="d-none d-sm-block">
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="d-sm-none">
-                                                        <div class="city">
-                                                            <div class="text">Ho Chi Minh</div>
-                                                        </div>
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="job-bottom">
-                                                <div class="tag-list">
-                                                    <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/python/ha-noi">
-                                                        <span>
-                                                            Python
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/nodejs/ha-noi">
-                                                        <span>
-                                                            NodeJS
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">
-                                                        <span>
-                                                            .NET
-                                                        </span>
-                                                    </a>
-                                                    <div class="visible-xs d-sm-none">
-                                                        <div class="distance-time-job-posted">
-                                                            <span class="distance-time">
-                                                                21 ngày trước
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="city_and_posted_date d-none d-sm-flex">
-                                            <div class="city">
-                                                <div class="address">
-                                                    <div class="text">Ho Chi Minh</div>
-                                                </div>
-                                            </div>
-                                            <div class="distance-time-job-posted">
-                                                <span class="distance-time">
-                                                    21 ngày trước
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="job super-hot-job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-url-value="/it-jobs/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040/content?locale=vi">
-                                    <div class="job_content">
-                                        <div class="logo">
-                                            <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
-                                                <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
-                                                    <picture>
-                                                        <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
-                                                        <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="job__description">
-                                            <div class="job__body">
-                                                <div class="details">
-                                                    <h3 class="title job-details-link-wrapper">
-                                                        <a target="_blank" data-controller="utm-tracking" href="/viec-lam-it/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040?lab_feature=employer_job">Back-End Engineer (NodeJS, .Net, Python)</a>
-                                                    </h3>
-                                                    <div class="svg-icon svg-icon--rounded svg-icon--green">
-                                                        <svg class="svg-icon__icon">
-                                                            <use xlink:href="#usd_icon"></use>
-                                                        </svg>
-                                                        <div class="svg-icon__text">You'll love it</div>
-                                                    </div>
-                                                    <div class="d-none d-sm-block">
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="d-sm-none">
-                                                        <div class="city">
-                                                            <div class="text">Ho Chi Minh</div>
-                                                        </div>
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="job-bottom">
-                                                <div class="tag-list">
-                                                    <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/python/ha-noi">
-                                                        <span>
-                                                            Python
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/nodejs/ha-noi">
-                                                        <span>
-                                                            NodeJS
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">
-                                                        <span>
-                                                            .NET
-                                                        </span>
-                                                    </a>
-                                                    <div class="visible-xs d-sm-none">
-                                                        <div class="distance-time-job-posted">
-                                                            <span class="distance-time">
-                                                                21 ngày trước
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="city_and_posted_date d-none d-sm-flex">
-                                            <div class="city">
-                                                <div class="address">
-                                                    <div class="text">Ho Chi Minh</div>
-                                                </div>
-                                            </div>
-                                            <div class="distance-time-job-posted">
-                                                <span class="distance-time">
-                                                    21 ngày trước
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="job super-hot-job" data-action="click->search--job-selection#select" data-controller="search--job-selection" data-search--job-selection-auto-select-value="0" data-search--job-selection-job-url-value="/it-jobs/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040/content?locale=vi">
-                                    <div class="job_content">
-                                        <div class="logo">
-                                            <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
-                                                <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
-                                                    <picture>
-                                                        <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
-                                                        <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
-                                                    </picture>
-                                                </a>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="job__description">
-                                            <div class="job__body">
-                                                <div class="details">
-                                                    <h3 class="title job-details-link-wrapper">
-                                                        <a target="_blank" data-controller="utm-tracking" href="/viec-lam-it/back-end-engineer-nodejs-net-python-ngan-hang-a-chau-acb-5040?lab_feature=employer_job">Back-End Engineer (NodeJS, .Net, Python)</a>
-                                                    </h3>
-                                                    <div class="svg-icon svg-icon--rounded svg-icon--green">
-                                                        <svg class="svg-icon__icon">
-                                                            <use xlink:href="#usd_icon"></use>
-                                                        </svg>
-                                                        <div class="svg-icon__text">You'll love it</div>
-                                                    </div>
-                                                    <div class="d-none d-sm-block">
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="d-sm-none">
-                                                        <div class="city">
-                                                            <div class="text">Ho Chi Minh</div>
-                                                        </div>
-                                                        <ul class="benefits">
-                                                            <li>Phúc lợi siêu hấp dẫn tại ACB</li>
-                                                            <li>Lương cực kỳ cạnh tranh</li>
-                                                            <li>Áp dụng công nghệ mới nhất</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="job-bottom">
-                                                <div class="tag-list">
-                                                    <a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/python/ha-noi">
-                                                        <span>
-                                                            Python
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/nodejs/ha-noi">
-                                                        <span>
-                                                            NodeJS
-                                                        </span>
-                                                    </a><a class="job__skill ilabel mkt-track" data-controller="utm-tracking" href="/viec-lam-it/.net/ha-noi">
-                                                        <span>
-                                                            .NET
-                                                        </span>
-                                                    </a>
-                                                    <div class="visible-xs d-sm-none">
-                                                        <div class="distance-time-job-posted">
-                                                            <span class="distance-time">
-                                                                21 ngày trước
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="city_and_posted_date d-none d-sm-flex">
-                                            <div class="city">
-                                                <div class="address">
-                                                    <div class="text">Ho Chi Minh</div>
-                                                </div>
-                                            </div>
-                                            <div class="distance-time-job-posted">
-                                                <span class="distance-time">
-                                                    21 ngày trước
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                }
+
+
                             </div>
                         </div>
                     </div>
@@ -688,4 +289,10 @@
             return false;
         })
     })
+    $(".ibutton-follow").click(function (e) {
+        var button = $(e.target);
+        $.post("/Company/FollowCompany", { id: button.attr("data-company-id") })
+            
+    });
+
 </script>

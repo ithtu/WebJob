@@ -15,8 +15,13 @@
     {
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <form style="background-color:whitesmoke" id="checkForm" method="get">
-            <div class="form-icon">
-                <span><i class="icon icon-user"></i></span>
+            <div class="form-group">
+                <input name="logo" id="logo" style="display: none"/>
+                <img id="pictureUpload" style="width: 200px; height: 200px; border-radius: 50%" />
+                <input type="file" name="fileUpload" id="fileUpload" accept="image/*"
+                       style="display:none;" />
+                
+                <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" />
             </div>
             <div class="form-group">
                 <input type="text" name="name" class="form-control item" id="name" placeholder="Họ tên">
@@ -40,11 +45,11 @@
 
            
             <div class="form-group">
-                <div name="sex" id="sex">
-                    <input type="radio" name="gender" id="sexer"> Male
-                    <input type="radio" name="gender" id="sexer"> Female
-                    <br>
-                </div>
+                <select name="gender" style="border-radius: 20px; margin-bottom: 4px; padding: 7px 20px; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da">
+                    <option> Male </option>
+                    <option> Female </option>
+                        
+                </select>
                 @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
 
             </div>
@@ -86,13 +91,13 @@
                     birth_date: {
                         required: true
                     },
-                    sex: {
-                        required: true
-                    },
+                   
                     address: {
                         required: true
                     },
-                   
+                    password: {
+                        required: true
+                    },
                     confirm_password: {
                         equalTo: "#password"
                     }
@@ -105,13 +110,14 @@
                     birth_date: {
                         required: "Không được bỏ trống"
                     },
-                    sex: {
-                        required: "Không được bỏ trống"
-                    },
+                    
                     address: {
                         required: "Không được bỏ trống"
                     },
-                    
+                    password: {
+                        required: "Không được bỏ trống"
+
+                    },
                     confirm_password: {
                         equalTo: "Mật khẩu xác nhận khác với mật khẩu"
                     }
@@ -157,3 +163,36 @@
     });
 </script>
 <script src="~/Scripts/js/validation.js"></script>
+@section upload
+    {
+    <script>
+        $(function () {
+            $('#btnUpload').click(function () {
+                $('#fileUpload').trigger('click');
+            });
+        });
+        $('#fileUpload').change(function () {
+            if (window.FormData !== undefined) {
+                var fileUpload = $('#fileUpload').get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append('file', files[0]);
+                $.ajax(
+                    {
+                        type: 'POST',
+                        url: '/User/ProcessUpload',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (urlImage) {
+                            $('#pictureUpload').attr('src', urlImage);
+                            $('#logo').val(urlImage);
+                        },
+                        error: function (err) {
+                            alert('Error ', err.statusText);
+                        }
+                    });
+            }
+        });
+    </script>
+}
