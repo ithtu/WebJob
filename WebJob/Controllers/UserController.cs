@@ -139,7 +139,7 @@ namespace WebJob.Controllers
                     {
                         var senderEmail = new MailAddress("quoctupdn@gmail.com", "CellphoneX");
                         var receiverEmail = new MailAddress(email, "Receiver");
-                        var password = "NQT290701";
+                        var password = "";
                         var sub = "XAC_THUC_TAI_KHOAN";
                         token tk = new token();
                         tk.Token1 = Nanoid.Nanoid.Generate(size: 10);
