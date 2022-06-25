@@ -59,6 +59,7 @@
       <Association Name="company_employer" Member="employers" ThisKey="id_company" OtherKey="id_company" Type="employer" />
       <Association Name="company_following_company" Member="following_companies" ThisKey="id_company" OtherKey="id_company" Type="following_company" />
       <Association Name="company_job" Member="jobs" ThisKey="id_company" OtherKey="id_company" Type="job" />
+      <Association Name="company_rating" Member="ratings" ThisKey="id_company" OtherKey="id_company" Type="rating" />
       <Association Name="company_reply_comment" Member="reply_comments" ThisKey="id_company" OtherKey="id_company" Type="reply_comment" />
       <Association Name="account_company" Member="account" ThisKey="id_account" OtherKey="id_account" Type="account" IsForeignKey="true" />
     </Type>
@@ -88,6 +89,7 @@
       <Association Name="employee_comment_employee" Member="comment_employees" ThisKey="id_employee" OtherKey="id_employee" Type="comment_employee" />
       <Association Name="employee_following_company" Member="following_companies" ThisKey="id_employee" OtherKey="id_employee" Type="following_company" />
       <Association Name="employee_following_job" Member="following_jobs" ThisKey="id_employee" OtherKey="id_employee" Type="following_job" />
+      <Association Name="employee_rating" Member="ratings" ThisKey="id_employee" OtherKey="id_employee" Type="rating" />
       <Association Name="employee_reply_comment" Member="reply_comments" ThisKey="id_employee" OtherKey="id_employee" Type="reply_comment" />
       <Association Name="account_employee" Member="account" ThisKey="id_account" OtherKey="id_account" Type="account" IsForeignKey="true" />
       <Association Name="cover_letter_employee" Member="cover_letter" ThisKey="id_letter" OtherKey="id_letter" Type="cover_letter" IsForeignKey="true" />
@@ -171,9 +173,13 @@
     <Type Name="rating">
       <Column Name="id_rate" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="id_employee" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="rate_star" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="rate_star" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_rating" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="id_company" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="company_rating" Member="company" ThisKey="id_company" OtherKey="id_company" Type="company" IsForeignKey="true" />
+      <Association Name="employee_rating" Member="employee" ThisKey="id_employee" OtherKey="id_employee" Type="employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.reply_comment" Member="reply_comments">

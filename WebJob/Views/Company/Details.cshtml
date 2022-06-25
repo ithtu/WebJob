@@ -4,6 +4,9 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var list = (List<job_detail>)ViewBag.JobCompany;
+    var list2 = (List<rating>)ViewBag.Rating;
+
+
 }
 <link href="~/Content/company.css" rel="stylesheet" />
 <link href="~/Content/Body.css" rel="stylesheet" />
@@ -80,7 +83,7 @@
                         </div>
                     </div>
                     <div class="headers__actions">
-                        <a class="button ibutton full-width ibutton-red" rel="nofollow" href="/companies/ngan-hang-a-chau-acb/review/new?utm_campaign=button_feature_review&amp;utm_medium=new_review&amp;utm_source=emp_page">Viết review</a>
+                        <a class="button ibutton full-width ibutton-red" rel="nofollow" href="@Url.Action("ReviewCompany","Company", new {id = Model.id_company })">Viết review</a>
                         <form id="follow-form">
                             @if (Model.company.isFollowing)
                             {
@@ -98,19 +101,19 @@
                     <div class="company-page__left">
                         <ul class="navigation">
                             <li class="navigation__item active">
-                                <a data-controller="utm-tracking" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">Tuyển dụng</a>
+                                <a data-controller="utm-tracking" href="#desktop1">Tuyển dụng</a>
                                 <div class="corner-bottom-right-overlay"></div>
                                 <div class="corner-bottom-right-curve"></div>
                             </li>
                             <li class="navigation__item review-tab">
-                                <a data-controller="utm-tracking" href="/nha-tuyen-dung/ngan-hang-a-chau-acb/danh-gia">13 Reviews</a>
+                                <a data-controller="utm-tracking" href="#desktop2">@list2.Count() Reviews</a>
                                 <div class="corner-bottom-right-overlay"></div>
                                 <div class="corner-bottom-right-curve"></div>
                                 <div class="corner-bottom-left-overlay"></div>
                                 <div class="corner-bottom-left-curve"></div>
                             </li>
                         </ul>
-                        <div class="panel panel-default jobs">
+                        <div class="panel panel-default jobs" id="desktop1">
                             <div class="panel-heading">
                                 <h2 class="panel-title">@Model.company.name_company Tuyển Dụng</h2>
                             </div>
@@ -123,8 +126,7 @@
                                                 <div class="logo-wrapper job-details-link-wrapper" data-action="mouseover->tooltip#showTooltip click->tooltip#disposeTooltip" data-controller="tooltip" title="" data-bs-original-title="Asia Commercial Bank (ACB)">
                                                     <a target="_blank" href="/nha-tuyen-dung/ngan-hang-a-chau-acb">
                                                         <picture>
-                                                            <source data-srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png" srcset="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZllXNWtYM0JoWkZzSGFVWnBSZz09IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--b463bdd256cf502ad47897818e63b1477749f99e/download.png">
-                                                            <img alt="Ngân Hàng Á Châu | ACB Vietnam Small Logo" data-controller="lazyload" data-src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png" size="65x65" class=" ls-is-cached lazyloaded" src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2ZGR2c9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--3d0f0ea82bc197abb6b483f53ec6ec28a71f3e19/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RTNKbGMybDZaVjloYm1SZmNHRmtXd2RwUm1sRyIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--d55b6722f71e82d147ad94b8445be27797820f9f/download.png">
+                                                           <img src="@Model.company.logo" />
                                                         </picture>
                                                     </a>
                                                 </div>
@@ -202,73 +204,63 @@
                                     </div>
                                 }
 
-
+                                
                             </div>
+                           
                         </div>
+                        <div class="panel panel-default jobs" id="desktop2" style="display: none">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">@Model.company.name_company Review</h2>
+                            </div>
+                            <div class="panel-body">
+                                @foreach (var item in list2)
+                                {
+                                    <hr />
+                                    <div class="featured-review">
+
+                                        <span class="featured-review__title" style="font-weight: 500">@item.title</span>
+                                        <span class="rating-stars-box">
+
+                                            @for (int i = 0; i < item.rate_star; i++)
+                                            {
+                                                <span class="fa fa-star"></span>
+                                            }
+                                        </span>
+
+
+                                        <div class="featured-review__paragraph">
+                                            @item.content
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div> 
                     </div>
                     <div class="company-page__right"><div class="panel panel-default company-ratings">
     <div class="panel-heading">
-        <h3 class="panel-title">Review "Chất"</h3>
+        <h3 class="panel-title" style="font-weight: 700">Review "Chất"</h3>
     </div>
     <div class="panel-body disable-user-select">
+        @foreach (var item in list2.Where(p=>p.rate_star == 5).Take(5))
+        {
+            <hr/>
+            <div class="featured-review">
+                
+                <span class="featured-review__title" style="font-weight: 500">@item.title</span>
+                <span class="rating-stars-box">
 
-        <div class="featured-review">
-            <span class="featured-review__title">sếp tốt, lương hơi thấp</span>
-            <span class="rating-stars-box">
-                <span class="blue-stars">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
+                    @for (int i = 0; i < item.rate_star; i++)
+                    {
+                        <span class="fa fa-star"></span>
+                    }
                 </span>
-                <span class="grey-stars">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                </span>
-            </span>
-            <div class="featured-review__paragraph">
-                văn phòng đẹp, sếp thân thiện,1 năm 13 tháng lương + thường KPI
+
+
+                <div class="featured-review__paragraph">
+                    @item.content
+                </div>
             </div>
-        </div>
-        <div class="featured-review">
-            <hr>
-            <span class="featured-review__title">Môi trường làm việc ổn định</span>
-            <span class="rating-stars-box">
-                <span class="blue-stars">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                </span>
-                <span class="grey-stars">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                </span>
-            </span>
-            <div class="featured-review__paragraph">
-                Môi trường tốt
-                Đồng nghiệp thân thiện
-                Công việc vừa sức
-                Có trả công xứng đáng nếu dự án được kích hoạt chế độ OT
-            </div>
-        </div>
-        <div class="featured-review">
-            <hr>
-            <span class="featured-review__title">Môi trường làm việc năng động</span>
-            <span class="rating-stars-box">
-                <span class="blue-stars">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                </span>
-                <span class="grey-stars">
-                    <img class="small" src="https://itviec.com/assets/rating-star-white-7e936fe21658ee9a7bf982b9ec56935cc7e20ffb6565217982c371d50c919653.svg" width="20" height="19">
-                </span>
-            </span>
-            <div class="featured-review__paragraph">
-                Văn phòng đẹp, đươcj tiếp cận với công nghệ mới trong ngân hàng
-                OT ít, trả OT đầy đủ,được cung cấp ăn uống nếu OT quá khuya
-            </div>
-        </div>
+        }
         <br>
         <a class="button ibutton full-width big ibutton-red" rel="nofollow" href="/companies/ngan-hang-a-chau-acb/review/new?utm_campaign=button_feature_review&amp;utm_medium=new_review&amp;utm_source=emp_page">Viết review</a>
     </div>
@@ -285,7 +277,10 @@
         $(".navigation__item").click(function () {
             $('.navigation__item').removeClass("active");
             $(this).addClass("active");
-           
+            let id_tab = $(this).children('a').attr('href');
+            $('.jobs').hide();
+            $(id_tab).fadeIn();
+
             return false;
         })
     })

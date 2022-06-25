@@ -408,7 +408,7 @@ headers__info__item-location {
     word-wrap: break-word;
 }
 .rating-stars-box {
-    font-size: 0;
+    font-size: 20px;
     position: relative;
     white-space: nowrap;
     display: inline-block;

@@ -19,6 +19,9 @@ namespace WebJob.Controllers
             employee acc = (employee)Session["account"];
             var item = dt.jobs.FirstOrDefault(p => p.id_company == id);
             var list = dt.job_details.Where(p => p.job.id_company == id).ToList();
+            var list2 = dt.ratings.Where(p => p.id_company == id).ToList();
+            ViewBag.Rating = list2;
+            
             ViewBag.JobCompany = list;
             
             if (acc == null)
@@ -332,6 +335,36 @@ namespace WebJob.Controllers
             string path = Server.MapPath("~/Content/CV/" + fileName) ;
             byte[] bytes = System.IO.File.ReadAllBytes(path);
             return File(bytes, "application/pdf", fileName);
+        }
+        public ActionResult ReviewCompany(string id)
+        {
+            if (Session["account"] == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                employee acc = (employee)Session["account"];
+                ViewBag.id = acc.id_employee;
+            }
+            var item = dt.companies.FirstOrDefault(p => p.id_company == id);
+            return View(item);
+        }
+        [HttpPost]
+        public ActionResult ReviewCompany(string id, int rating, string content,string title, string idacc)
+        {
+            rating obj = new rating();
+            obj.id_rate = Nanoid.Nanoid.Generate(size: 10);
+            obj.id_employee = idacc;
+            obj.id_company = id;
+            obj.title = title;
+            obj.content = content;
+            obj.date_rating = DateTime.Now;
+            obj.rate_star = rating;
+
+            dt.ratings.InsertOnSubmit(obj);
+            dt.SubmitChanges();
+            return RedirectToAction("Details", "Company", new { id = id });
         }
 
 

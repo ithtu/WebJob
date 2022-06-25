@@ -134,52 +134,52 @@ namespace WebJob.Controllers
                 dt.employees.InsertOnSubmit(employee);
                 dt.SubmitChanges();
 
-                
-                   /* try
+
+               /* try
+                {
+                    var senderEmail = new MailAddress("store.confirmmail@gmail.com", "CellphoneX");
+                    var receiverEmail = new MailAddress(email, "Receiver");
+                    var password = "tqfjkbylnznhkzhx";
+                    var sub = "XAC_THUC_TAI_KHOAN";
+                    token tk = new token();
+                    tk.Token1 = Nanoid.Nanoid.Generate(size: 10);
+                    tk.time1 = DateTime.Now;
+                    tk.time2 = DateTime.Now.AddMinutes(2);
+                    dt.tokens.InsertOnSubmit(tk);
+                    dt.SubmitChanges();
+
+                    var link = string.Format("{0}", Url.Action("ConfirmSignUp", "Home", new { Token = tk.Token1, id = acc.id_account }, Request.Url.Scheme));
+                    var body = "Vui lòng click vào link để xác nhận tài khoản: " + link + "\n" +
+                                "Xác nhận này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2) + "\n" +
+                                "Xin cảm ơn quý khách !!!";
+
+                    var smtp = new SmtpClient
                     {
-                        var senderEmail = new MailAddress("quoctupdn@gmail.com", "CellphoneX");
-                        var receiverEmail = new MailAddress(email, "Receiver");
-                        var password = "";
-                        var sub = "XAC_THUC_TAI_KHOAN";
-                        token tk = new token();
-                        tk.Token1 = Nanoid.Nanoid.Generate(size: 10);
-                        tk.time1 = DateTime.Now;
-                        tk.time2 = DateTime.Now.AddMinutes(2);
-                        dt.tokens.InsertOnSubmit(tk);
-                       
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = sub,
+                        Body = body,
 
-                        *//*var link = string.Format("{0}", Url.Action("ConfirmSignUp", "Home", new { Token = tk.Token1, id = acc.id_account }, Request.Url.Scheme));*//*
-                        var body = "Vui lòng click vào link để xác nhận tài khoản: " + *//*link*/ /*+*//* "\n" +
-                                    "Xác nhận này chỉ có hiệu lực đến " + DateTime.Now.AddMinutes(2) + "\n" +
-                                    "Xin cảm ơn quý khách !!!";
-
-                        var smtp = new SmtpClient
-                        {
-                            Host = "smtp.gmail.com",
-                            Port = 587,
-                            EnableSsl = true,
-                            DeliveryMethod = SmtpDeliveryMethod.Network,
-                            UseDefaultCredentials = false,
-                            Credentials = new NetworkCredential(senderEmail.Address, password)
-                        };
-                        using (var mess = new MailMessage(senderEmail, receiverEmail)
-                        {
-                            Subject = sub,
-                            Body = body,
-
-                        })
-                        {
-                            smtp.Send(mess);
-                        }
-                     
-                        return RedirectToAction("ConfirmSignup", "User");
-
+                    })
+                    {
+                        smtp.Send(mess);
                     }
-                    catch (Exception)
-                    {
-                        ViewBag.Error = "Some Error";
-                    }*/
-                
+
+                    return RedirectToAction("ConfirmSignup", "User");
+
+                }
+                catch (Exception)
+                {
+                    ViewBag.Error = "Some Error";
+                }*/
+
 
                 return RedirectToAction("Index", "Home");
 
